@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>留了麼 Liumer MVP</title>
+    <meta name="description" content="留了麼是香港留學生專屬社群，結合 AI 選課沙盤、同校經驗、在地活動與學生福利。" />
+    <meta property="og:title" content="留了麼 Liumer · AI 選課沙盤" />
+    <meta property="og:description" content="先模擬，再選課。用可解釋 AI 檢查課程規則、課表負擔與個人目標。" />
+    <meta property="og:image" content="./assets/liumer-ai-course-planner-og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="留了麼 Liumer · AI 選課沙盤" />
+    <meta name="twitter:description" content="香港留學生專屬的 AI 選課模擬與校園互助社群。" />
+    <meta name="twitter:image" content="./assets/liumer-ai-course-planner-og.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="主導航">
+        <div class="brand">
+          <img class="mascot-mini" src="./assets/liumer-mascot-cutout.png" alt="Liumer 吉祥物小留" />
+          <div>
+            <strong>留了么</strong>
+            <span>Liumer</span>
+          </div>
+        </div>
+
+        <form class="sidebar-search" id="sidebarSearch" role="search">
+          <span class="search-symbol" aria-hidden="true">⌕</span>
+          <input id="globalSearch" type="search" placeholder="搜尋帖子、活動、福利" autocomplete="off" aria-label="搜尋全站內容" />
+          <button class="clear-search" id="clearSearch" type="button" aria-label="清除搜尋" hidden>×</button>
+        </form>
+
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="home" type="button">社區問答</button>
+          <button class="nav-item ai-nav" data-view="aiPlanner" type="button"><span class="ai-nav-mark">AI</span> 選課沙盤</button>
+          <button class="nav-item" data-view="events" type="button">在地活動</button>
+          <button class="nav-item" data-view="store" type="button">L-Store</button>
+          <button class="nav-item" data-view="profile" type="button">我的背景</button>
+          <button class="nav-item" data-view="about" type="button">關於留了麼</button>
+          <button class="nav-item" data-view="partner" type="button">合作夥伴</button>
+          <button class="nav-item" data-view="contact" type="button">聯絡我們</button>
+          <button class="nav-item settings-nav" data-view="settings" type="button">設定</button>
+        </nav>
+
+        <section class="points-panel" aria-label="積分">
+          <span>小留積分</span>
+          <strong id="pointsBalance">0</strong>
+          <p>認證、完整提問、經驗回答與活動簽到都能累積；每日有上限。</p>
+          <div class="level-chip" id="currentLevel">Lv.1 新來小留</div>
+          <div class="campus-chip" id="campusStatus">校園身份待認證</div>
+        </section>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">校園郵箱認證社群 · 留學生專屬</p>
+            <h1>今天想在香港收穫什麼新體驗？</h1>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost-action" id="openRegister" type="button">註冊 / 校園認證</button>
+            <button class="ai-action" id="openPlanner" type="button">AI 選課</button>
+            <button class="primary-action" id="openAsk" type="button">發問</button>
+          </div>
+        </header>
+
+        <section class="hero-strip" aria-label="Liumer 助手">
+          <img class="mascot" src="./assets/liumer-mascot-cutout.png" alt="Liumer 吉祥物小留" />
+          <div>
+            <h2>我是小留</h2>
+            <p id="liumerLine">沒有人回覆也不用慌，我會先給你一個暖場方向，再等有經驗的同學補充。</p>
+          </div>
+          <button class="ghost-action" id="shuffleTip" type="button">換一句</button>
+        </section>
+
+        <section class="content-grid view active" id="homeView">
+          <div class="feed-column">
+            <div class="section-head">
+              <h2>精準話題</h2>
+              <div class="tabs" role="tablist" aria-label="話題分類">
+                <button class="tab active" data-filter="all" type="button">全部</button>
+                <button class="tab" data-filter="高校圈" type="button">高校圈</button>
+                <button class="tab" data-filter="留學生話題" type="button">留學生話題</button>
+                <button class="tab" data-filter="AI 共學圈" type="button">AI 共學圈</button>
+                <button class="tab" data-filter="租房避坑" type="button">租房避坑</button>
+                <button class="tab" data-filter="畢業二手" type="button">畢業二手</button>
+                <button class="tab" data-filter="升學就業" type="button">升學就業</button>
+                <button class="tab" data-filter="融入香港" type="button">融入香港</button>
+                <button class="tab" data-filter="港大 HKU" type="button">港大</button>
+                <button class="tab" data-filter="中大 CUHK" type="button">中大</button>
+                <button class="tab" data-filter="科大 HKUST" type="button">科大</button>
+                <button class="tab" data-filter="城大 CityU" type="button">城大</button>
+                <button class="tab" data-filter="理大 PolyU" type="button">理大</button>
+                <button class="tab" data-filter="浸大 HKBU" type="button">浸大</button>
+                <button class="tab" data-filter="嶺南 LU" type="button">嶺南</button>
+              </div>
+            </div>
+            <div id="questionFeed" class="question-feed"></div>
+          </div>
+
+          <aside class="right-rail">
+            <section class="panel">
+              <div class="panel-title">
+                <h3>留學生常用入口</h3>
+                <span>校園生活工具箱</span>
+              </div>
+              <div class="campus-list">
+                <button class="ai-tool-entry" data-tool="ai-planner" type="button"><strong>AI 選課沙盤</strong><span>先模擬課表，再進學校系統選課</span></button>
+                <button data-tool="register" type="button"><strong>校園郵箱認證</strong><span>用學校郵箱加入學生社群</span></button>
+                <button data-tool="schools" type="button"><strong>高校圈</strong><span>查看港大、中大、科大等院校帖</span></button>
+                <button data-tool="arrival" type="button"><strong>到港清單</strong><span>電話卡、銀行、住宿、選課</span></button>
+                <button data-tool="perks" type="button"><strong>學生禮遇</strong><span>咖啡、餐飲、文化活動的合作福利</span></button>
+              </div>
+            </section>
+
+            <section class="panel">
+              <div class="panel-title">
+                <h3>本週任務</h3>
+                <span>積分激勵</span>
+              </div>
+              <ul class="task-list">
+                <li><span>完成校園郵箱認證（一次）</span><b>+120</b></li>
+                <li><span>發布完整問題（每日首 2 條）</span><b>+15</b></li>
+                <li><span>提供 40 字以上經驗（每日首 3 條）</span><b>+25</b></li>
+                <li><span>活動到場簽到</span><b>+60</b></li>
+              </ul>
+            </section>
+
+            <section class="panel">
+              <div class="panel-title">
+                <h3>會員等級</h3>
+                <span id="miniLevelStatus">目前 Lv.1</span>
+              </div>
+              <div class="mini-levels" id="miniLevels"></div>
+            </section>
+          </aside>
+        </section>
+
+        <section class="view" id="aiPlannerView">
+          <section class="ai-planner-hero">
+            <div>
+              <p class="eyebrow">Liumer AI · 選課決策支援</p>
+              <h2>先在沙盤裡試，再進學校系統搶課。</h2>
+              <p>把學校規則、個人目標、時間偏好和同校經驗放在一起，生成可解釋的選課方案。你仍然是最後做決定的人。</p>
+              <div class="ai-trust-row">
+                <span>規則檢查</span>
+                <span>課表模擬</span>
+                <span>推薦解釋</span>
+                <span>同校經驗</span>
+              </div>
+            </div>
+            <div class="ai-hero-score" aria-label="AI 選課示例匹配度">
+              <span>示例匹配度</span>
+              <strong id="heroMatchScore">92</strong>
+              <small>/ 100</small>
+              <p>每項建議都會說明原因與風險</p>
+            </div>
+          </section>
+
+          <div class="ai-planner-layout">
+            <form class="panel planner-form" id="plannerForm">
+              <div class="panel-title">
+                <h3>告訴 AI 你的選課情況</h3>
+                <span>約 30 秒完成</span>
+              </div>
+
+              <div class="planner-field-row">
+                <label>
+                  就讀高校
+                  <select id="plannerSchool">
+                    <option value="hku">香港大學 HKU</option>
+                    <option value="cuhk">香港中文大學 CUHK</option>
+                    <option value="hkust">香港科技大學 HKUST</option>
+                    <option value="cityu">香港城市大學 CityU</option>
+                    <option value="polyu">香港理工大學 PolyU</option>
+                    <option value="hkbu">香港浸會大學 HKBU</option>
+                    <option value="lu" selected>嶺南大學 LU</option>
+                  </select>
+                </label>
+                <label>
+                  年級
+                  <select id="plannerYear">
+                    <option value="1">Year 1</option>
+                    <option value="2" selected>Year 2</option>
+                    <option value="3">Year 3</option>
+                    <option value="4">Year 4 / Final Year</option>
+                    <option value="pg">授課型研究生</option>
+                  </select>
+                </label>
+              </div>
+
+              <label>
+                學習方向
+                <select id="plannerTrack">
+                  <option value="data">計算機、AI 與數據</option>
+                  <option value="business">商科、金融與創業</option>
+                  <option value="policy" selected>社會科學與公共政策</option>
+                  <option value="creative">傳理、設計與創意</option>
+                </select>
+              </label>
+
+              <fieldset class="planner-goals">
+                <legend>這學期最重要的目標</legend>
+                <div class="goal-options">
+                  <label><input type="radio" name="plannerGoal" value="safe" /><span><b>穩妥畢業</b><small>先滿足必修與先修要求</small></span></label>
+                  <label><input type="radio" name="plannerGoal" value="career" checked /><span><b>求職導向</b><small>強化作品集與職場能力</small></span></label>
+                  <label><input type="radio" name="plannerGoal" value="explore" /><span><b>興趣探索</b><small>保留跨學科與新方向</small></span></label>
+                </div>
+              </fieldset>
+
+              <fieldset class="planner-preferences">
+                <legend>時間與壓力偏好</legend>
+                <label class="planner-check"><input id="avoidMorning" type="checkbox" checked /><span><b>避免早上 9 點前上課</b><small>AI 會優先尋找較晚時段</small></span></label>
+                <label class="planner-check"><input id="freeFriday" type="checkbox" /><span><b>盡量空出星期五</b><small>方便實習、活動或集中自習</small></span></label>
+                <label class="planner-check"><input id="balancedLoad" type="checkbox" checked /><span><b>平衡閱讀與小組作業</b><small>避免多門高負擔課同時出現</small></span></label>
+              </fieldset>
+
+              <button class="primary-action planner-generate" id="generatePlan" type="submit">生成 AI 選課方案</button>
+              <p class="planner-disclaimer">MVP 使用示例課程資料，不會登入或代替任何大學的正式選課系統。</p>
+            </form>
+
+            <section class="planner-results" aria-live="polite">
+              <div class="planner-result-head">
+                <div>
+                  <p class="eyebrow" id="plannerSystemLabel">模擬 Lingnan DegreeWorks</p>
+                  <h3 id="plannerResultTitle">求職導向 · 平衡課表</h3>
+                  <p id="plannerResultSummary">AI 已根據你的目標與時間偏好，從示例課程中組合出一套方案。</p>
+                </div>
+                <button class="ghost-action" id="regeneratePlan" type="button">換一組方案</button>
+              </div>
+
+              <div class="ai-metric-grid">
+                <article><span>AI 匹配度</span><strong id="matchScore">92%</strong><small>目標與偏好</small></article>
+                <article><span>畢業要求覆蓋</span><strong id="coverageScore">76%</strong><small>本學期建議</small></article>
+                <article><span>每週投入</span><strong id="weeklyLoad">29h</strong><small>上課 + 課後</small></article>
+                <article><span>組合風險</span><strong class="risk-low" id="riskLevel">低</strong><small id="riskHint">無硬性衝堂</small></article>
+              </div>
+
+              <section class="panel timetable-panel">
+                <div class="panel-title">
+                  <h3>推薦課表</h3>
+                  <span id="creditSummary">4 門 · 12 學分</span>
+                </div>
+                <div class="course-plan-list" id="coursePlanList"></div>
+              </section>
+
+              <div class="ai-explain-grid">
+                <section class="panel ai-explanation">
+                  <div class="panel-title"><h3>小留為什麼這樣排</h3><span>可解釋推薦</span></div>
+                  <ul id="plannerReasons"></ul>
+                </section>
+                <section class="panel ai-risk-panel">
+                  <div class="panel-title"><h3>提交前再檢查</h3><span>風險提示</span></div>
+                  <ul id="plannerWarnings"></ul>
+                </section>
+              </div>
+
+              <section class="ai-method panel">
+                <div>
+                  <p class="eyebrow">AI 如何得出建議</p>
+                  <h3>規則先行，再做個人化排序</h3>
+                  <p>正式版會先讀取學校公開課程規則，再用你的目標與偏好排序，最後加入匿名化的同校經驗訊號。</p>
+                </div>
+                <div class="method-bars" aria-label="推薦權重示例">
+                  <div><span>學校規則</span><i style="--weight:45%"></i><b>45%</b></div>
+                  <div><span>個人目標</span><i style="--weight:30%"></i><b>30%</b></div>
+                  <div><span>時間負擔</span><i style="--weight:15%"></i><b>15%</b></div>
+                  <div><span>同校經驗</span><i style="--weight:10%"></i><b>10%</b></div>
+                </div>
+              </section>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="searchView">
+          <div class="section-head search-heading">
+            <div>
+              <p class="eyebrow">全站搜尋</p>
+              <h2 id="searchTitle">輸入關鍵字開始搜尋</h2>
+              <p id="searchSummary">可搜尋社區帖子、評論、在地活動與 L-Store 福利。</p>
+            </div>
+            <button class="ghost-action" id="closeSearch" type="button">返回社區</button>
+          </div>
+          <div class="search-results" id="searchResults"></div>
+        </section>
+
+        <section class="view" id="detailView">
+          <button class="ghost-action back-button" id="backToFeed" type="button">返回社區</button>
+          <div id="topicDetail" class="topic-detail"></div>
+        </section>
+
+        <section class="view" id="userProfileView">
+          <button class="ghost-action back-button" id="backToDetail" type="button">返回話題</button>
+          <div id="publicProfile" class="public-profile"></div>
+        </section>
+
+        <section class="view" id="aboutView">
+          <div class="about-hero panel">
+            <div>
+              <p class="eyebrow">關於留了麼</p>
+              <h2>留了麼是一個讓留學生更快融入、更敢探索、更容易互助的平台。</h2>
+              <p>
+                我們把留學生活中最需要的資訊、真實經驗、人脈互助、在地活動和專屬優惠放在同一個地方，
+                讓學生不只是「找到答案」，而是真的建立第二個家。
+              </p>
+            </div>
+            <img class="about-mascot" src="./assets/liumer-mascot-cutout.png" alt="Liumer 吉祥物小留" />
+          </div>
+
+          <div class="value-grid">
+            <article class="panel">
+              <h3>真實經驗社區</h3>
+              <p>圍繞新生準備、租房避坑、升學就業、畢業二手和融入香港建立高信任度內容。</p>
+            </article>
+            <article class="panel">
+              <h3>有溫度的互助</h3>
+              <p>用小留暖場、會員等級和用戶背景展示，降低發問焦慮，也幫大家判斷回答含金量。</p>
+            </article>
+            <article class="panel">
+              <h3>校園身份入口</h3>
+              <p>以學校郵箱建立基本信任，讓同校經驗、學生優惠和校園活動更容易被真正需要的人看到。</p>
+            </article>
+            <article class="panel">
+              <h3>線上線下聯動</h3>
+              <p>透過在地活動、文化導賞、商戶優惠和 L-Store，讓留學體驗從資訊延伸到生活。</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="view" id="eventsView">
+          <div class="section-head">
+            <h2>實體和虛擬的文旅聯動</h2>
+            <p>把資訊、社交和在地體驗放在同一個入口。</p>
+          </div>
+          <div class="card-grid" id="eventsList"></div>
+        </section>
+
+        <section class="view" id="storeView">
+          <div class="section-head">
+            <div>
+              <h2>L-Store</h2>
+              <p>合作夥伴提供產品與活動名額，讓真實互助換成下週真正用得上的學生福利。</p>
+            </div>
+          </div>
+          <section class="store-overview" aria-label="積分制度說明">
+            <section class="store-balance panel">
+              <p class="eyebrow">小留積分帳戶</p>
+              <div class="store-balance-value"><strong id="storePoints">0</strong><span>積分</span></div>
+              <p id="storeProgress">完成校園認證後，即可兌換學生專屬福利。</p>
+              <button class="ghost-action" id="storeRegister" type="button">完成校園認證 +120</button>
+            </section>
+            <section class="earn-rules panel">
+              <div class="panel-title">
+                <h3>怎樣賺得合理</h3>
+                <span>只獎勵有用的經驗</span>
+              </div>
+              <div class="earn-rule-list">
+                <div><b>+120</b><span>校園郵箱認證</span><small>一次</small></div>
+                <div><b>+40</b><span>完成學術 / 職場背景</span><small>一次</small></div>
+                <div><b>+15</b><span>發布完整問題</span><small>每日首 2 條</small></div>
+                <div><b>+25</b><span>提供 40 字以上的經驗回答</span><small>每日首 3 條</small></div>
+                <div><b>+60</b><span>活動到場簽到</span><small>完成後發放</small></div>
+              </div>
+              <p class="store-principle">積分不是現金折算；它記錄你為社群提供的可用經驗。重複灌水、只留表情或未到場活動不會獲得積分。</p>
+            </section>
+          </section>
+          <div class="store-subhead">
+            <h3>學生專屬換禮</h3>
+            <p>校園身份認證後可兌換；福利由合作夥伴贊助，每件限一次。</p>
+          </div>
+          <div class="card-grid" id="storeList"></div>
+        </section>
+
+        <section class="view" id="profileView">
+          <div class="profile-layout">
+            <section class="profile-card">
+              <img class="profile-mascot" src="./assets/liumer-mascot-cutout.png" alt="Liumer 吉祥物小留" />
+              <h2>謝同學</h2>
+              <p>內地來港留學生 · 公共及智慧管理</p>
+              <div class="badge-row">
+                <span>住宿實測官</span>
+                <span>飲食地圖貢獻者</span>
+                <span id="profileCampusBadge">校園身份待認證</span>
+                <span id="profileLevelBadge">Lv.1 新來小留</span>
+              </div>
+            </section>
+            <section class="panel profile-editor">
+              <h3>學術 / 職場背景展示</h3>
+              <label>
+                學校郵箱
+                <input id="schoolEmail" value="xiejisheng@ln.hk" />
+              </label>
+              <button class="ghost-action" id="verifyEmail" type="button">完成校園認證 +120</button>
+              <label>
+                目前學校
+                <input value="嶺南大學" />
+              </label>
+              <label>
+                擅長解答
+                <input value="來港準備、住宿避坑、文化活動" />
+              </label>
+              <label>
+                個人介紹
+                <textarea>希望幫後來的同學少走彎路，也找到真正屬於自己的香港生活。</textarea>
+              </label>
+              <button class="primary-action" id="saveProfile" type="button">保存資料</button>
+            </section>
+          </div>
+
+          <section class="panel membership-panel">
+            <div class="section-head">
+              <div>
+                <h2>會員等級標準與福利</h2>
+                <p>用清楚的等級讓貢獻、信任和福利形成正循環。</p>
+              </div>
+            </div>
+            <div class="level-grid" id="levelGrid"></div>
+          </section>
+        </section>
+
+        <section class="view" id="settingsView">
+          <div class="section-head settings-heading">
+            <div>
+              <p class="eyebrow">帳戶與內容</p>
+              <h2>設定</h2>
+              <p>管理通知、隱私和內容顯示；不改變小留形象或平台主題。</p>
+            </div>
+            <span class="settings-status" id="settingsStatus">已使用預設設定</span>
+          </div>
+
+          <div class="settings-grid">
+            <section class="panel settings-panel">
+              <div class="panel-title">
+                <h3>內容偏好</h3>
+                <span>讓首頁更貼近你的校園生活</span>
+              </div>
+              <label class="setting-select">
+                優先高校
+                <select id="preferredSchool">
+                  <option value="all">全部香港高校</option>
+                  <option value="港大 HKU">港大 HKU</option>
+                  <option value="中大 CUHK">中大 CUHK</option>
+                  <option value="科大 HKUST">科大 HKUST</option>
+                  <option value="城大 CityU">城大 CityU</option>
+                  <option value="理大 PolyU">理大 PolyU</option>
+                  <option value="浸大 HKBU">浸大 HKBU</option>
+                  <option value="嶺南 LU">嶺南 LU</option>
+                </select>
+              </label>
+              <label class="setting-select">
+                界面語言
+                <select id="interfaceLanguage">
+                  <option value="zh-Hant">繁體中文</option>
+                  <option value="zh-Hans">简体中文</option>
+                  <option value="en">English</option>
+                </select>
+              </label>
+              <fieldset class="density-setting">
+                <legend>帖子顯示密度</legend>
+                <div class="segmented-setting">
+                  <label><input type="radio" name="feedDensity" value="comfortable" checked /><span>舒適</span></label>
+                  <label><input type="radio" name="feedDensity" value="compact" /><span>緊湊</span></label>
+                </div>
+              </fieldset>
+            </section>
+
+            <section class="panel settings-panel">
+              <div class="panel-title">
+                <h3>通知</h3>
+                <span>只保留對留學生活有用的提醒</span>
+              </div>
+              <label class="toggle-row"><span><strong>帖子有新回覆</strong><small>有人補充經驗時提醒我</small></span><input id="replyNotifications" type="checkbox" checked /></label>
+              <label class="toggle-row"><span><strong>活動與名額</strong><small>已收藏活動開放報名時提醒我</small></span><input id="eventNotifications" type="checkbox" checked /></label>
+              <label class="toggle-row"><span><strong>L-Store 上新</strong><small>有新的學生福利時提醒我</small></span><input id="storeNotifications" type="checkbox" /></label>
+            </section>
+
+            <section class="panel settings-panel">
+              <div class="panel-title">
+                <h3>隱私與身份</h3>
+                <span>控制其他同學看到的背景資料</span>
+              </div>
+              <label class="toggle-row"><span><strong>公開高校與會員等級</strong><small>幫助其他人判斷回答背景</small></span><input id="showSchoolProfile" type="checkbox" checked /></label>
+              <label class="toggle-row"><span><strong>允許同校同學找到我</strong><small>只使用高校圈與學校身份標籤</small></span><input id="discoverableBySchool" type="checkbox" checked /></label>
+              <button class="ghost-action settings-register" id="settingsRegister" type="button">管理校園郵箱認證</button>
+            </section>
+          </div>
+
+          <div class="settings-actions">
+            <p>合作內容仍會清楚標示為「合作內容 / 廣告」，並依你正在看的生活話題提供。</p>
+            <button class="primary-action" id="saveSettings" type="button">保存設定</button>
+          </div>
+        </section>
+
+        <section class="view" id="contactView">
+          <div class="section-head">
+            <div>
+              <h2>聯絡我們</h2>
+              <p>想合作、試用、給建議，或希望把留了麼帶到你的學校，都可以找我們。</p>
+            </div>
+          </div>
+
+          <div class="contact-layout">
+            <section class="panel contact-card">
+              <h3>直接聯絡</h3>
+              <p><strong>隊長 / CEO</strong> 謝繼升</p>
+              <p><strong>電話</strong> +852 6400 8775</p>
+              <p><strong>電郵</strong> xiejisheng52@gmail.com</p>
+              <p><strong>定位</strong> 面向在港留學生、準備赴港學生、畢業生與本地合作夥伴。</p>
+            </section>
+
+            <section class="panel contact-form">
+              <h3>留下訊息</h3>
+              <label>
+                你的名字
+                <input id="contactName" placeholder="例如：陳同學" />
+              </label>
+              <label>
+                聯絡方式
+                <input id="contactInfo" placeholder="Email / WhatsApp / WeChat" />
+              </label>
+              <label>
+                想說的內容
+                <textarea id="contactMessage" placeholder="我想了解合作、試用、活動或校園推廣..."></textarea>
+              </label>
+              <button class="primary-action" id="submitContact" type="button">送出訊息</button>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="partnerView">
+          <section class="partner-hero" aria-label="合作夥伴計畫">
+            <div>
+              <p class="eyebrow">合作夥伴計畫</p>
+              <h2>讓真正有消費力、文化好奇心和成長潛力的留學生，走進你的空間。</h2>
+              <p>留了麼以校園身份和真實生活話題連結在港留學生；學校、校園周邊餐廳、咖啡館和文化機構可以贊助學生福利、活動名額或明示廣告，換取更精準的到店與參與。</p>
+              <button class="primary-action" id="goToPartnerContact" type="button">洽談合作</button>
+            </div>
+            <div class="partner-hero-note">
+              <span>合作原則</span>
+              <strong>讓利給學生，回到品牌</strong>
+              <p>福利透明、廣告明示、只向有關聯的生活場景推薦。</p>
+            </div>
+          </section>
+
+          <section class="partner-metric-grid" aria-label="合作價值">
+            <article>
+              <strong>校園驗證</strong>
+              <p>以學校郵箱建立基本身份信任，減少無效曝光。</p>
+            </article>
+            <article>
+              <strong>高意圖場景</strong>
+              <p>新生到港、找房、求職、文化探索，都對應真實消費決策。</p>
+            </article>
+            <article>
+              <strong>長期關係</strong>
+              <p>從第一杯咖啡、一次展覽到畢業搬家，陪學生建立香港生活半徑。</p>
+            </article>
+          </section>
+
+          <section class="partner-section">
+            <div class="section-head">
+              <div>
+                <h2>合作如何運作</h2>
+                <p>合作收入維持社群服務，合作福利則直接回到學生手上。</p>
+              </div>
+            </div>
+            <div class="partner-flow">
+              <article><span>01</span><h3>提供資源</h3><p>贊助 L-Store 禮物、學生折扣、活動名額，或預訂內容合作位。</p></article>
+              <article><span>02</span><h3>透明展示</h3><p>資訊流每 5 條帖子插入 1 條「合作內容 / 廣告」，清楚標示來源與學生禮遇。</p></article>
+              <article><span>03</span><h3>學生到店</h3><p>學生用校園身份領取福利，在餐飲、咖啡、展覽與活動中產生真實體驗。</p></article>
+              <article><span>04</span><h3>回看成效</h3><p>正式版提供曝光、點擊、領取與到場等匿名化成效資料，方便優化下一輪合作。</p></article>
+            </div>
+          </section>
+
+          <section class="partner-section">
+            <div class="section-head">
+              <div>
+                <h2>適合的合作夥伴</h2>
+                <p>不只是在賣折扣，而是在成為留學生香港生活的一部分。</p>
+              </div>
+            </div>
+            <div class="partner-type-grid">
+              <article><h3>大學與學院</h3><p>迎新資源、職涯活動、校友計畫、校園文化活動。</p></article>
+              <article><h3>餐廳與咖啡館</h3><p>學生套餐、迎新咖啡券、社群聚會場地與到店禮遇。</p></article>
+              <article><h3>博物館與文化機構</h3><p>導賞名額、學生票、展覽活動與文化探索內容合作。</p></article>
+              <article><h3>生活服務品牌</h3><p>電話卡、銀行、搬家、租房、二手交易等到港高需求服務。</p></article>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="askDialog">
+      <form class="ask-form">
+        <div class="dialog-head">
+          <h2>發起一個問題</h2>
+          <button class="icon-btn" id="closeAsk" aria-label="關閉" type="button">×</button>
+        </div>
+        <label>
+          問題標題
+          <input id="askTitle" placeholder="例如：第一次去大館有什麼注意事項？" required />
+        </label>
+        <label>
+          分類
+          <select id="askTopic">
+            <option>留學生話題</option>
+            <option>AI 共學圈</option>
+            <option>租房避坑</option>
+            <option>畢業二手</option>
+            <option>升學就業</option>
+            <option>融入香港</option>
+            <optgroup label="高校圈">
+              <option>港大 HKU</option>
+              <option>中大 CUHK</option>
+              <option>科大 HKUST</option>
+              <option>城大 CityU</option>
+              <option>理大 PolyU</option>
+              <option>浸大 HKBU</option>
+              <option>嶺南 LU</option>
+            </optgroup>
+          </select>
+        </label>
+        <label>
+          補充描述
+          <textarea id="askBody" placeholder="說說你的情況，其他同學會更容易幫到你。"></textarea>
+        </label>
+        <label>
+          加入照片
+          <input id="askPhoto" type="file" accept="image/*" />
+        </label>
+        <div class="dialog-actions">
+          <button class="ghost-action" id="cancelAsk" type="button">取消</button>
+          <button class="primary-action" id="submitQuestion" value="default" type="button">發布完整問題 +15</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="registerDialog">
+      <form class="register-form">
+        <div class="dialog-head">
+          <h2>用學校郵箱加入留了麼</h2>
+          <button class="icon-btn" id="closeRegister" aria-label="關閉" type="button">×</button>
+        </div>
+        <p class="form-note">留了麼以校園郵箱作為基本身份認證。完成後可進入高校圈、使用學生專屬福利，並獲得一次性 120 積分；同一身份不會重複領取。</p>
+        <label>
+          選擇學校
+          <div class="school-shortcuts" id="schoolShortcuts">
+            <button data-domain="connect.hku.hk" type="button">港大 HKU</button>
+            <button data-domain="link.cuhk.edu.hk" type="button">中大 CUHK</button>
+            <button data-domain="connect.ust.hk" type="button">科大 HKUST</button>
+            <button data-domain="my.cityu.edu.hk" type="button">城大 CityU</button>
+            <button data-domain="connect.polyu.hk" type="button">理大 PolyU</button>
+            <button data-domain="life.hkbu.edu.hk" type="button">浸大 HKBU</button>
+            <button data-domain="ln.hk" type="button">嶺南 LU</button>
+          </div>
+        </label>
+        <label>
+          學校郵箱
+          <input id="registerEmail" placeholder="yourname@ln.hk" />
+        </label>
+        <label>
+          你的身份
+          <select id="registerRole">
+            <option>在港留學生</option>
+            <option>準備赴港留學生</option>
+            <option>香港本地學生</option>
+            <option>畢業生 / Alumni</option>
+          </select>
+        </label>
+        <div class="dialog-actions">
+          <button class="ghost-action" id="cancelRegister" type="button">取消</button>
+          <button class="primary-action" id="submitRegister" type="button">完成校園認證 +120</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="partnerDialog">
+      <section class="partner-dialog">
+        <div class="dialog-head">
+          <h2>學生合作禮遇</h2>
+          <button class="icon-btn" id="closePartner" aria-label="關閉" type="button">×</button>
+        </div>
+        <div id="partnerDialogContent"></div>
+      </section>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
