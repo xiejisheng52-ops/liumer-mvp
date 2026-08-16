@@ -501,6 +501,91 @@ const seedQuestions = [
       { authorId: "rain", body: "我會優先挑交通方便、能隨時離開的活動，這樣一個人去壓力小。去了兩三次後，反而比較容易遇到固定會再見面的人。", photos: [makePhoto("香港週末社交", "#d35f45", "#be8327")] },
     ],
   },
+  {
+    title: "修過《智慧城市與數字治理》嗎？想了解評核、案例和搶課情況",
+    topic: "留學生話題",
+    courseTitle: "智慧城市與數字治理",
+    body: "AI 選課沙盤把這門課列為前沿選修。想問修過的同學：課堂會不會偏技術、香港案例多不多，以及名額通常是否緊張？",
+    authorId: "me",
+    answers: 12,
+    points: 135,
+    photos: [],
+    comments: [
+      { authorId: "lingU", body: "內容不要求寫很深的程式，但要能把數據、平台治理和公共政策放在同一個案例裡分析。小組報告最好早點確定城市議題。", photos: [] },
+      { authorId: "cityuPeer", body: "熱門老師的班次會比較快滿，建議先收藏替代時段。選課前可以先看往年評核比例，案例課很看平時參與。", photos: [] },
+      { authorId: "liumer", body: "同校評價屬於經驗訊號，正式名額、先修和課程內容仍要以當學期校方系統為準。", photos: [] },
+    ],
+  },
+  {
+    title: "《公共政策分析》閱讀量和課堂討論強度如何？",
+    topic: "留學生話題",
+    courseTitle: "公共政策分析",
+    body: "希望用這門課打好政策框架，但也擔心每週閱讀量和英文討論壓力。修過的同學可以分享準備方法嗎？",
+    authorId: "lingU",
+    answers: 9,
+    points: 110,
+    photos: [],
+    comments: [
+      { authorId: "lingU", body: "每週先抓政策問題、利益相關者和評估標準三件事，讀文獻會快很多。討論課重點是說清楚證據，不是背理論名稱。", photos: [] },
+      { authorId: "rain", body: "如果英文閱讀慢，可以和同學輪流做一頁摘要，但最後仍要自己看結論和研究限制。", photos: [] },
+    ],
+  },
+  {
+    title: "《社會研究方法》真的很重嗎？定量和小組專題怎樣分配時間",
+    topic: "留學生話題",
+    courseTitle: "社會研究方法",
+    body: "沙盤預測這門課負擔較高。想知道問卷、訪談、統計和研究報告會不會集中在期中後一起交。",
+    authorId: "me",
+    answers: 15,
+    points: 155,
+    photos: [],
+    comments: [
+      { authorId: "cuhkPeer", body: "真正花時間的是把研究問題變成可測量的變量。小組如果第一週就分好文獻、方法和數據清理，後面不會那麼趕。", photos: [] },
+      { authorId: "hkuPeer", body: "建議提前確認軟件要求和數據格式。方法課的搶課不一定最難，但熱門時段常會先滿。", photos: [] },
+    ],
+  },
+  {
+    title: "《香港社會與城市生活》適合剛到港的同學嗎？",
+    topic: "融入香港",
+    courseTitle: "香港社會與城市生活",
+    body: "想選一門能幫我理解社區、住房和城市文化的課，也希望不要只有課本，最好會有實地觀察。",
+    authorId: "rain",
+    answers: 11,
+    points: 120,
+    photos: [],
+    comments: [
+      { authorId: "rain", body: "這類課最有價值的是把日常看到的屋邨、街市和交通放回歷史脈絡。若有田野作業，記得預留週末時間。", photos: [] },
+      { authorId: "hkbuPeer", body: "對剛到港的同學很友好，評核通常比較分散，但熱門老師和下午時段可能較難搶。", photos: [] },
+    ],
+  },
+  {
+    title: "《非牟利組織創新》小組合作多嗎？適合做社會創新作品集嗎",
+    topic: "升學就業",
+    courseTitle: "非牟利組織創新",
+    body: "希望把課程專題做成求職作品集，但不確定合作機構、提案和小組分工佔比。",
+    authorId: "lingU",
+    answers: 10,
+    points: 125,
+    photos: [],
+    comments: [
+      { authorId: "lingU", body: "很適合累積訪談、需求分析和方案驗證案例，但要在組內先定義誰負責對外聯絡。這類課的工作量取決於合作機構回覆速度。", photos: [] },
+      { authorId: "codemate", body: "可以把成果做成一頁問題、原型、測試結果和下一步，面試時比只放一份簡報更好說。", photos: [] },
+    ],
+  },
+  {
+    title: "《經濟學與公共選擇》早課值得修嗎？想聽考試和先修經驗",
+    topic: "留學生話題",
+    courseTitle: "經濟學與公共選擇",
+    body: "這門課對政策方向很重要，但示例時段較早。想知道數學要求、考試比重和是否有較晚班次。",
+    authorId: "me",
+    answers: 8,
+    points: 100,
+    photos: [],
+    comments: [
+      { authorId: "lingU", body: "數學不是唯一難點，關鍵是理解個人誘因如何影響公共決策。若選早課，最好把同一天其他課排得鬆一點。", photos: [] },
+      { authorId: "liumer", body: "沙盤會把早課偏好和課程重要性一起評分；正式版也會列出同課號的替代班次。", photos: [] },
+    ],
+  },
 ];
 
 const events = [
@@ -573,6 +658,7 @@ const plannerSchools = {
   cityu: { name: "香港城市大學 CityU", system: "CityU AIMS", prefix: "GE", credits: 3 },
   polyu: { name: "香港理工大學 PolyU", system: "PolyU eStudent", prefix: "APSS", credits: 3 },
   hkbu: { name: "香港浸會大學 HKBU", system: "HKBU BUniPort", prefix: "GCLA", credits: 3 },
+  eduhk: { name: "香港教育大學 EdUHK", system: "EdUHK The Portal", prefix: "GEH", credits: 3 },
   lu: { name: "嶺南大學 LU", system: "Lingnan DegreeWorks", prefix: "CCC", credits: 3 },
 };
 
@@ -586,6 +672,8 @@ const plannerTracks = {
       { title: "人本 AI 產品實驗室", type: "小組專題", day: "星期四", time: "15:30–18:20", hours: 8, load: "高", goals: ["career", "explore"] },
       { title: "數據庫與資訊管理", type: "專業選修", day: "星期五", time: "10:30–12:20", hours: 7, load: "中", goals: ["safe", "career"] },
       { title: "統計推理與決策", type: "核心方法", day: "星期一", time: "08:30–10:20", hours: 7, load: "高", goals: ["safe"] },
+      { title: "AI 工具安全與學術誠信工作坊", type: "短課工作坊", day: "星期四", time: "10:30–12:20", hours: 2, load: "低", credits: 1, goals: ["safe", "career"] },
+      { title: "數據視覺化衝刺", type: "技能微課", day: "星期五", time: "15:30–17:20", hours: 4, load: "中", credits: 2, goals: ["career", "explore"] },
     ],
   },
   business: {
@@ -597,6 +685,8 @@ const plannerTracks = {
       { title: "創業驗證工作室", type: "小組專題", day: "星期四", time: "14:30–17:20", hours: 8, load: "高", goals: ["career", "explore"] },
       { title: "會計與財務基礎", type: "必修示例", day: "星期五", time: "09:30–11:20", hours: 7, load: "中", goals: ["safe"] },
       { title: "消費者洞察與研究", type: "專業選修", day: "星期二", time: "08:30–10:20", hours: 6, load: "中", goals: ["career", "explore"] },
+      { title: "創業財務速成工作坊", type: "短課工作坊", day: "星期三", time: "15:30–17:20", hours: 2, load: "低", credits: 1, goals: ["safe", "career"] },
+      { title: "市場驗證實驗", type: "技能微課", day: "星期五", time: "13:30–15:20", hours: 4, load: "中", credits: 2, goals: ["career", "explore"] },
     ],
   },
   policy: {
@@ -608,6 +698,8 @@ const plannerTracks = {
       { title: "香港社會與城市生活", type: "本地脈絡", day: "星期四", time: "15:30–17:20", hours: 5, load: "低", goals: ["safe", "explore"] },
       { title: "非牟利組織創新", type: "小組專題", day: "星期五", time: "13:30–16:20", hours: 7, load: "中", goals: ["career", "explore"] },
       { title: "經濟學與公共選擇", type: "基礎理論", day: "星期二", time: "08:30–10:20", hours: 7, load: "高", goals: ["safe"] },
+      { title: "政策簡報工作坊", type: "短課工作坊", day: "星期四", time: "09:30–11:20", hours: 2, load: "低", credits: 1, goals: ["safe", "career"] },
+      { title: "社區田野微專題", type: "技能微課", day: "星期五", time: "10:30–12:20", hours: 4, load: "中", credits: 2, goals: ["career", "explore"] },
     ],
   },
   creative: {
@@ -619,11 +711,113 @@ const plannerTracks = {
       { title: "香港文化與視覺傳播", type: "本地脈絡", day: "星期四", time: "13:30–15:20", hours: 5, load: "低", goals: ["safe", "explore"] },
       { title: "互動體驗設計工作室", type: "小組專題", day: "星期五", time: "14:30–17:20", hours: 8, load: "高", goals: ["career", "explore"] },
       { title: "傳播理論導論", type: "基礎理論", day: "星期一", time: "08:30–10:20", hours: 6, load: "中", goals: ["safe"] },
+      { title: "生成式內容版權工作坊", type: "短課工作坊", day: "星期四", time: "10:30–12:20", hours: 2, load: "低", credits: 1, goals: ["safe", "career"] },
+      { title: "互動原型衝刺", type: "技能微課", day: "星期五", time: "10:30–12:20", hours: 4, load: "中", credits: 2, goals: ["career", "explore"] },
     ],
   },
 };
 
+const courseDetails = {
+  "數據思維與程式設計": { description: "用資料拆解問題，練習基礎程式、視覺化與可重複的分析流程。", rush: "高", rushReason: "跨專業需求高，入門班次通常較快滿。" },
+  "應用機器學習工作室": { description: "以真實資料完成模型、測試與作品展示，適合累積求職作品集。", rush: "高", rushReason: "工作室名額少，作品集導向課程關注度高。" },
+  "AI 倫理與數據治理": { description: "從偏見、私隱和問責案例理解 AI 系統的社會與治理風險。", rush: "中", rushReason: "跨學科熱門，但通常有多個相近選修。" },
+  "人本 AI 產品實驗室": { description: "從訪談、原型到可用性測試，設計真正回應使用者需要的 AI 工具。", rush: "高", rushReason: "小班專題制，座位與導師容量有限。" },
+  "數據庫與資訊管理": { description: "理解資料模型、查詢與資訊系統，建立可落地的資料管理基礎。", rush: "中", rushReason: "專業選修需求穩定，熱門時段較快滿。" },
+  "統計推理與決策": { description: "用機率、推論與不確定性支援商業和公共決策。", rush: "低", rushReason: "理論比重較高，通常仍有替代班次。" },
+  "AI 工具安全與學術誠信工作坊": { description: "用真實情境練習引用、查證、私隱保護與負責任地使用生成式 AI。", rush: "中", rushReason: "一學分短課容易配入課表，開放後通常很快額滿。" },
+  "數據視覺化衝刺": { description: "在兩週內把一組資料整理成可解讀的圖表、故事線與展示頁。", rush: "高", rushReason: "兩學分技能課時間短、作品明確，名額通常較少。" },
+  "商業分析與決策": { description: "把營運、客戶與市場資料轉成可以執行的商業判斷。", rush: "高", rushReason: "商科與非商科學生都會選，需求集中。" },
+  "金融科技產品實務": { description: "拆解支付、風控與數字金融產品，完成一個小型產品方案。", rush: "高", rushReason: "金融科技題材熱門，實務班名額有限。" },
+  "香港商業環境": { description: "從公司、產業與制度案例理解香港市場的運作方式。", rush: "中", rushReason: "新生與交換生需求較高。" },
+  "創業驗證工作室": { description: "以訪談和快速原型驗證需求，不只停留在商業計畫書。", rush: "高", rushReason: "跨院系組隊課程，熱門導師班次競爭較大。" },
+  "會計與財務基礎": { description: "掌握報表、成本與現金流，建立後續商科課程需要的共同語言。", rush: "中", rushReason: "基礎要求廣，但通常開設較多班次。" },
+  "消費者洞察與研究": { description: "用訪談、問卷和行為資料理解使用者，再轉化成產品或傳播策略。", rush: "中", rushReason: "研究實務受歡迎，早晚時段熱度差異明顯。" },
+  "創業財務速成工作坊": { description: "用一學分掌握現金流、成本與簡易融資判斷，適合非商科創業者。", rush: "中", rushReason: "短課門檻低，創業團隊與跨院學生需求較高。" },
+  "市場驗證實驗": { description: "以訪談、落地頁和小規模測試快速判斷一個需求是否值得繼續。", rush: "高", rushReason: "實作導向、兩學分易配課，熱門導師班次競爭較大。" },
+  "公共政策分析": { description: "用問題界定、政策工具與成效評估比較不同公共方案。", rush: "中", rushReason: "核心課需求穩定，熱門老師班次先滿。" },
+  "智慧城市與數字治理": { description: "以香港及亞洲案例分析平台、城市數據、AI 與公共治理。", rush: "高", rushReason: "題材新且跨學科，過往同類課程名額較緊。" },
+  "社會研究方法": { description: "從研究問題到問卷、訪談和資料分析，完成一套可驗證的研究設計。", rush: "中", rushReason: "必修需求高，但一般會按主修安排容量。" },
+  "香港社會與城市生活": { description: "從社區、住房、流動與文化理解香港城市日常。", rush: "高", rushReason: "本地脈絡課受留學生歡迎，下午班較熱門。" },
+  "非牟利組織創新": { description: "與社會議題或機構場景連結，設計可驗證的服務與合作方案。", rush: "中", rushReason: "小組課有容量限制，但需求較分散。" },
+  "經濟學與公共選擇": { description: "用誘因、制度和集體行動理解公共決策中的取捨。", rush: "低", rushReason: "理論與早課降低競爭，通常較易選入。" },
+  "政策簡報工作坊": { description: "把複雜政策資料濃縮成一頁摘要與三分鐘口頭建議。", rush: "中", rushReason: "一學分實用短課受實習與求職學生歡迎。" },
+  "社區田野微專題": { description: "用觀察、短訪談和現場記錄完成一個香港社區議題的小型研究。", rush: "高", rushReason: "兩學分且包含外出實作，導師可帶領人數有限。" },
+  "數字敘事與內容策略": { description: "把研究、故事結構與平台格式結合，製作可發布的內容作品。", rush: "高", rushReason: "作品集導向明確，傳理與非傳理學生都關注。" },
+  "AI 輔助創意實務": { description: "練習用生成式 AI 發想、製作和評估創意內容，同時處理版權與真實性。", rush: "高", rushReason: "AI 題材熱門，實作班次容量較小。" },
+  "媒體研究方法": { description: "學習內容分析、受眾研究與訪談，為畢業專題建立研究基礎。", rush: "中", rushReason: "方法課需求穩定，熱門老師時段較緊。" },
+  "香港文化與視覺傳播": { description: "從城市影像、展覽與流行文化理解香港如何被觀看和表達。", rush: "高", rushReason: "文化題材吸引交換生，選課初期熱度高。" },
+  "互動體驗設計工作室": { description: "以使用者流程、原型與測試完成一個可操作的互動體驗。", rush: "高", rushReason: "設備與導師容量有限，工作室課座位少。" },
+  "傳播理論導論": { description: "建立媒體、受眾與社會影響的核心概念，支援後續專業課。", rush: "低", rushReason: "基礎課通常有多班或較大容量。" },
+  "生成式內容版權工作坊": { description: "辨識生成內容的授權、署名與素材風險，建立可交付的檢查清單。", rush: "中", rushReason: "AI 與版權需求快速增加，短課名額容易額滿。" },
+  "互動原型衝刺": { description: "用兩學分完成從流程草圖到可測試原型的一次快速迭代。", rush: "高", rushReason: "作品集價值直接，工作坊設備與導師容量有限。" },
+};
+
+const finalExamCourses = new Set([
+  "數據思維與程式設計",
+  "AI 倫理與數據治理",
+  "數據庫與資訊管理",
+  "統計推理與決策",
+  "商業分析與決策",
+  "香港商業環境",
+  "會計與財務基礎",
+  "公共政策分析",
+  "社會研究方法",
+  "經濟學與公共選擇",
+  "媒體研究方法",
+  "傳播理論導論",
+]);
+
 let plannerVariation = 0;
+let fixedCourses = [];
+
+function timeToMinutes(value) {
+  const [hours, minutes] = String(value).split(":").map(Number);
+  return hours * 60 + minutes;
+}
+
+function courseTimes(course) {
+  const [start, end] = course.time.split("–");
+  return { start: timeToMinutes(start), end: timeToMinutes(end) };
+}
+
+function isGroupCourse(course) {
+  return /小組|工作室|專題|實驗室/.test(`${course.type} ${course.title}`);
+}
+
+function coursesConflict(first, second) {
+  if (first.day !== second.day) return false;
+  const firstTimes = courseTimes(first);
+  const secondTimes = courseTimes(second);
+  return firstTimes.start < secondTimes.end && secondTimes.start < firstTimes.end;
+}
+
+function renderFixedCourses() {
+  const list = document.querySelector("#fixedCourseList");
+  if (!fixedCourses.length) {
+    list.innerHTML = '<p class="fixed-course-empty">尚未加入固定課程。</p>';
+    return;
+  }
+  list.innerHTML = fixedCourses
+    .map((course, index) => `
+      <div class="fixed-course-item">
+        <div>
+          <strong>${escapeHTML(course.title)}</strong>
+          <small>${escapeHTML(course.day)} ${escapeHTML(course.time)} · ${course.credits} 學分 · ${course.finalExam ? "有 Final Exam" : "無 Final Exam"}</small>
+        </div>
+        <button class="fixed-course-remove" data-fixed-index="${index}" type="button" aria-label="移除 ${escapeHTML(course.title)}">×</button>
+      </div>
+    `)
+    .join("");
+}
+
+function populateTargetCreditOptions() {
+  const creditSelect = document.querySelector("#targetCredits");
+  const currentValue = Number(creditSelect.value) || 12;
+  creditSelect.innerHTML = Array.from({ length: 36 }, (_, index) => index + 1)
+    .map((credits) => `<option value="${credits}">至少 ${credits} 學分</option>`)
+    .join("");
+  creditSelect.value = String(Math.min(36, Math.max(1, currentValue)));
+}
 
 function plannerState() {
   return {
@@ -631,9 +825,17 @@ function plannerState() {
     year: document.querySelector("#plannerYear").value,
     trackKey: document.querySelector("#plannerTrack").value,
     goal: document.querySelector('input[name="plannerGoal"]:checked')?.value || "career",
-    avoidMorning: document.querySelector("#avoidMorning").checked,
-    freeFriday: document.querySelector("#freeFriday").checked,
+    targetCourses: Number(document.querySelector("#targetCourses").value),
+    targetCredits: Number(document.querySelector("#targetCredits").value),
+    preferredFreeDay: document.querySelector("#preferredFreeDay").value,
+    earliestStart: timeToMinutes(document.querySelector("#earliestStart").value),
+    latestEnd: timeToMinutes(document.querySelector("#latestEnd").value),
+    maxWeeklyHours: Number(document.querySelector("#maxWeeklyHours").value),
+    groupWorkTolerance: document.querySelector("#groupWorkTolerance").value,
+    finalExamPreference: document.querySelector("#finalExamPreference").value,
     balancedLoad: document.querySelector("#balancedLoad").checked,
+    compactDays: document.querySelector("#compactDays").checked,
+    avoidTightGaps: document.querySelector("#avoidTightGaps").checked,
   };
 }
 
@@ -642,37 +844,206 @@ function courseCode(school, year, index) {
   return `${school.prefix}${level}${index + 1}0`;
 }
 
+function courseCombinations(items, size, start = 0, current = [], results = []) {
+  if (current.length === size) {
+    results.push([...current]);
+    return results;
+  }
+  for (let index = start; index <= items.length - (size - current.length); index += 1) {
+    current.push(items[index]);
+    courseCombinations(items, size, index + 1, current, results);
+    current.pop();
+  }
+  return results;
+}
+
+function selectCourseCombination(items, targetCourses, targetCredits, finalExamPreference, existingFinalExamCount = 0) {
+  const size = Math.min(targetCourses, items.length);
+  if (size <= 0) return [];
+  const combinations = courseCombinations(items, size);
+  const best = combinations
+    .map((courses) => {
+      const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
+      const preferenceScore = courses.reduce((sum, course) => sum + course.score, 0);
+      const finalExamCount = existingFinalExamCount + courses.filter((course) => course.finalExam).length;
+      const examPenalty = finalExamPreference === "avoid"
+        ? finalExamCount * 10
+        : finalExamPreference === "allowOne"
+          ? Math.max(0, finalExamCount - 1) * 14
+          : finalExamPreference === "prefer"
+            ? (courses.length - finalExamCount) * 5
+            : 0;
+      const creditPenalty = totalCredits < targetCredits
+        ? (targetCredits - totalCredits) * 12
+        : (totalCredits - targetCredits) * 0.7;
+      return { courses, score: preferenceScore - creditPenalty - examPenalty };
+    })
+    .sort((first, second) => second.score - first.score)[0];
+  return best?.courses || items.slice(0, size);
+}
+
+function renderTimetableImage(courses, school, state) {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1400;
+  canvas.height = 880;
+  const context = canvas.getContext("2d");
+  const weekdays = ["星期一", "星期二", "星期三", "星期四", "星期五"];
+  const startHour = 8;
+  const endHour = 20;
+  const gutter = 112;
+  const top = 150;
+  const right = 32;
+  const bottom = 38;
+  const gridWidth = canvas.width - gutter - right;
+  const gridHeight = canvas.height - top - bottom;
+  const dayWidth = gridWidth / weekdays.length;
+  const hourHeight = gridHeight / (endHour - startHour);
+
+  context.fillStyle = "#fffaf2";
+  context.fillRect(0, 0, canvas.width, canvas.height);
+  context.fillStyle = "#171614";
+  context.font = "700 38px Arial, sans-serif";
+  context.fillText("留了麼 AI 周課表", 40, 54);
+  context.fillStyle = "#6f675e";
+  context.font = "22px Arial, sans-serif";
+  context.fillText(`${school.name} · ${courses.length} 門 · ${courses.reduce((sum, course) => sum + course.credits, 0)} 學分`, 40, 92);
+  context.font = "18px Arial, sans-serif";
+  context.fillText(`目標：${state.targetCourses} 門 / 至少 ${state.targetCredits} 學分`, 40, 122);
+
+  context.textAlign = "center";
+  weekdays.forEach((day, index) => {
+    const x = gutter + index * dayWidth;
+    context.fillStyle = index % 2 ? "#f5eee3" : "#efe7dc";
+    context.fillRect(x, top - 42, dayWidth, 42);
+    context.fillStyle = "#171614";
+    context.font = "700 19px Arial, sans-serif";
+    context.fillText(day, x + dayWidth / 2, top - 15);
+  });
+
+  context.textAlign = "right";
+  for (let hour = startHour; hour <= endHour; hour += 1) {
+    const y = top + (hour - startHour) * hourHeight;
+    context.strokeStyle = hour % 2 === 0 ? "#cfc6ba" : "#e4ddd3";
+    context.lineWidth = 1;
+    context.beginPath();
+    context.moveTo(gutter, y);
+    context.lineTo(canvas.width - right, y);
+    context.stroke();
+    if (hour < endHour) {
+      context.fillStyle = "#6f675e";
+      context.font = "15px Arial, sans-serif";
+      context.fillText(`${String(hour).padStart(2, "0")}:00`, gutter - 14, y + 5);
+    }
+  }
+
+  weekdays.forEach((_, index) => {
+    const x = gutter + index * dayWidth;
+    context.strokeStyle = "#d8d0c5";
+    context.beginPath();
+    context.moveTo(x, top - 42);
+    context.lineTo(x, canvas.height - bottom);
+    context.stroke();
+  });
+  context.beginPath();
+  context.moveTo(canvas.width - right, top - 42);
+  context.lineTo(canvas.width - right, canvas.height - bottom);
+  context.stroke();
+
+  courses.forEach((course, courseIndex) => {
+    const dayIndex = weekdays.indexOf(course.day);
+    if (dayIndex < 0) return;
+    const times = courseTimes(course);
+    const y = top + ((Math.max(times.start, startHour * 60) - startHour * 60) / 60) * hourHeight;
+    const rawHeight = ((Math.min(times.end, endHour * 60) - Math.max(times.start, startHour * 60)) / 60) * hourHeight;
+    const inset = courseIndex % 2 ? 8 : 5;
+    const x = gutter + dayIndex * dayWidth + inset;
+    const width = dayWidth - inset - 7;
+    const height = Math.max(48, rawHeight - 4);
+    context.fillStyle = course.fixed ? "#f6d4c8" : "#d8eee8";
+    context.strokeStyle = course.fixed ? "#e43b32" : "#0f7773";
+    context.lineWidth = 3;
+    context.fillRect(x, y + 2, width, height);
+    context.strokeRect(x, y + 2, width, height);
+    context.textAlign = "left";
+    context.fillStyle = "#171614";
+    context.font = "700 16px Arial, sans-serif";
+    const shortTitle = course.title.length > 13 ? `${course.title.slice(0, 13)}…` : course.title;
+    context.fillText(shortTitle, x + 10, y + 26, width - 20);
+    context.fillStyle = "#4f4841";
+    context.font = "14px Arial, sans-serif";
+    context.fillText(course.time, x + 10, y + 49, width - 20);
+    if (height > 74) context.fillText(`${course.credits} 學分 · ${course.finalExam ? "有 Final" : "無 Final"}`, x + 10, y + 70, width - 20);
+  });
+
+  document.querySelector("#timetableImage").src = canvas.toDataURL("image/png");
+}
+
 function renderPlannerPlan() {
   const state = plannerState();
   const school = plannerSchools[state.schoolKey];
   const track = plannerTracks[state.trackKey];
   const goalLabels = { safe: "穩妥畢業", career: "求職導向", explore: "興趣探索" };
+  const fixedCredits = fixedCourses.reduce((sum, course) => sum + course.credits, 0);
+  const fixedFinalExamCount = fixedCourses.filter((course) => course.finalExam).length;
+  const recommendedCourseTarget = Math.max(0, state.targetCourses - fixedCourses.length);
+  const recommendedCreditTarget = Math.max(0, state.targetCredits - fixedCredits);
+  const dayFrequency = track.courses.reduce((result, course) => ({ ...result, [course.day]: (result[course.day] || 0) + 1 }), {});
   const scoredCourses = track.courses
     .map((course, index) => {
+      const details = courseDetails[course.title] || { description: "結合概念、案例與實作，建立可延伸到後續課程的能力。", rush: "中", rushReason: "需求與開班容量大致平衡。" };
+      const times = courseTimes(course);
+      const finalExam = finalExamCourses.has(course.title);
+      const conflictsFixedCourse = fixedCourses.some((fixedCourse) => coursesConflict(course, fixedCourse));
       let score = course.goals.includes(state.goal) ? 12 : 2;
-      if (state.avoidMorning) score += course.time.startsWith("08") || course.time.startsWith("09") ? -9 : 3;
-      if (state.freeFriday) score += course.day === "星期五" ? -11 : 2;
+      score += times.start < state.earliestStart ? -9 : 2;
+      score += times.end > state.latestEnd ? -7 : 1;
+      if (state.preferredFreeDay) score += course.day === state.preferredFreeDay ? -12 : 2;
       if (state.balancedLoad) score += course.load === "高" ? -2 : 3;
+      if (state.groupWorkTolerance === "low") score += isGroupCourse(course) ? -8 : 2;
+      if (state.groupWorkTolerance === "high") score += isGroupCourse(course) ? 4 : 0;
+      if (state.compactDays) score += (dayFrequency[course.day] - 1) * 3;
+      if (state.maxWeeklyHours <= 24) score += course.hours >= 8 ? -4 : 2;
+      if (state.finalExamPreference === "avoid") score += finalExam ? -8 : 3;
+      if (state.finalExamPreference === "prefer") score += finalExam ? 4 : -2;
+      if (conflictsFixedCourse) score -= 60;
       score += ((index + plannerVariation) % 4) * 0.35;
-      return { ...course, sourceIndex: index, score };
+      return { ...course, ...details, credits: course.credits || school.credits, finalExam, conflictsFixedCourse, sourceIndex: index, score, startMinutes: times.start, endMinutes: times.end };
     })
     .sort((a, b) => b.score - a.score);
 
-  const selected = scoredCourses.slice(0, 4);
-  const morningCount = selected.filter((course) => course.time.startsWith("08") || course.time.startsWith("09")).length;
-  const fridayCount = selected.filter((course) => course.day === "星期五").length;
+  const recommended = selectCourseCombination(scoredCourses, recommendedCourseTarget, recommendedCreditTarget, state.finalExamPreference, fixedFinalExamCount);
+  const selected = [...fixedCourses, ...recommended];
+  const earlyCount = selected.filter((course) => course.startMinutes < state.earliestStart).length;
+  const lateCount = selected.filter((course) => course.endMinutes > state.latestEnd).length;
+  const freeDayCount = selected.filter((course) => course.day === state.preferredFreeDay).length;
   const highLoadCount = selected.filter((course) => course.load === "高").length;
+  const highRushCount = selected.filter((course) => course.rush === "高").length;
+  const finalExamCount = selected.filter((course) => course.finalExam).length;
+  const groupCourseCount = selected.filter(isGroupCourse).length;
+  const tightGapCount = selected.reduce((count, course, index) => {
+    const hasTightPair = selected.slice(index + 1).some((other) => {
+      if (other.day !== course.day) return false;
+      const gap = Math.max(other.startMinutes, course.startMinutes) - Math.min(other.endMinutes, course.endMinutes);
+      return gap < 45;
+    });
+    return count + Number(hasTightPair);
+  }, 0);
+  const hardConflictCount = selected.reduce((count, course, index) => (
+    count + Number(selected.slice(index + 1).some((other) => coursesConflict(course, other)))
+  ), 0);
   const weeklyHours = selected.reduce((sum, course) => sum + course.hours, 0);
-  const preferencePenalty = morningCount * 4 + fridayCount * 4 + Math.max(0, highLoadCount - 1) * 3;
+  const preferencePenalty = earlyCount * 4 + lateCount * 3 + freeDayCount * 4 + Math.max(0, highLoadCount - 1) * 3 + Math.max(0, weeklyHours - state.maxWeeklyHours) / 2 + (state.avoidTightGaps ? tightGapCount * 4 : 0);
   const match = Math.max(76, 94 - preferencePenalty + (plannerVariation % 2));
   const coverageBase = state.goal === "safe" ? 84 : state.goal === "career" ? 76 : 68;
-  const coverage = Math.min(92, coverageBase + (state.year === "4" ? 5 : state.year === "1" ? -3 : 0));
-  const mediumRisk = preferencePenalty >= 7 || highLoadCount >= 3;
-  const totalCredits = selected.length * school.credits;
+  const coverage = Math.min(94, coverageBase + (state.year === "4" ? 5 : state.year === "1" ? -3 : 0) + Math.max(0, selected.length - 4) * 2);
+  const mediumRisk = preferencePenalty >= 7 || highLoadCount >= 3 || highRushCount >= 3 || hardConflictCount > 0;
+  const totalCredits = selected.reduce((sum, course) => sum + course.credits, 0);
 
   document.querySelector("#plannerSystemLabel").textContent = `模擬 ${school.system} · 示例資料`;
   document.querySelector("#plannerResultTitle").textContent = `${goalLabels[state.goal]} · ${track.label}`;
-  document.querySelector("#plannerResultSummary").textContent = `AI 從 ${school.name} 的示例課程中，按你的年級、目標與時間偏好組合出這套方案。`;
+  document.querySelector("#plannerResultSummary").textContent = fixedCourses.length
+    ? `已保留 ${fixedCourses.length} 門必修／已選課，AI 再從 ${school.name} 的示例課程中補齊剩餘方案。`
+    : `AI 從 ${school.name} 的示例課程中，按你的年級、目標與時間偏好組合出這套方案。`;
   document.querySelector("#matchScore").textContent = `${match}%`;
   document.querySelector("#heroMatchScore").textContent = match;
   document.querySelector("#coverageScore").textContent = `${coverage}%`;
@@ -681,30 +1052,63 @@ function renderPlannerPlan() {
   const riskElement = document.querySelector("#riskLevel");
   riskElement.textContent = mediumRisk ? "中" : "低";
   riskElement.className = mediumRisk ? "risk-medium" : "risk-low";
-  document.querySelector("#riskHint").textContent = mediumRisk ? "有偏好衝突" : "無硬性衝堂";
+  document.querySelector("#riskHint").textContent = hardConflictCount ? "發現時間衝堂" : mediumRisk ? "有偏好衝突" : "無硬性衝堂";
 
   document.querySelector("#coursePlanList").innerHTML = selected
-    .map(
-      (course) => `
-        <article class="course-row">
-          <span class="course-code">${escapeHTML(courseCode(school, state.year, course.sourceIndex))}</span>
-          <div class="course-copy"><strong>${escapeHTML(course.title)}</strong><small>${escapeHTML(course.type)} · AI 推薦</small></div>
-          <span class="course-time">${escapeHTML(course.day)} ${escapeHTML(course.time)}</span>
-          <span class="course-load ${course.load === "高" ? "high" : ""}">${escapeHTML(course.load)}負擔</span>
+    .map((course) => {
+      const discussionIndex = questions.findIndex((question) => question.courseTitle === course.title || question.title.includes(course.title));
+      const reviewLink = discussionIndex >= 0
+        ? `<button class="course-review-link" data-question-index="${discussionIndex}" type="button">查看 ${questions[discussionIndex].comments.length} 條同學評價</button>`
+        : "";
+      return `
+        <article class="course-row ${course.fixed ? "is-fixed" : ""}">
+          <span class="course-code">${course.fixed ? "已選" : escapeHTML(courseCode(school, state.year, course.sourceIndex))}</span>
+          <div class="course-copy">
+            <strong>${escapeHTML(course.title)}</strong>
+            <small>${course.fixed ? "必修／已選 · AI 保留" : `${escapeHTML(course.type)} · AI 推薦`}</small>
+            <p>${escapeHTML(course.description)}</p>
+            ${reviewLink}
+          </div>
+          <div class="course-schedule">
+            <span class="course-time">${escapeHTML(course.day)} ${escapeHTML(course.time)}</span>
+            <div class="course-signals">
+              <span class="course-credit">${course.credits} 學分</span>
+              <span class="course-final ${course.finalExam ? "" : "no-final"}">${course.finalExam ? "有 Final" : "無 Final"}</span>
+              <span class="course-load ${course.load === "高" ? "high" : ""}">${course.fixed ? "已固定" : `${escapeHTML(course.load)}負擔`}</span>
+              ${course.fixed ? "" : `<span class="course-rush rush-${course.rush === "高" ? "high" : course.rush === "低" ? "low" : "medium"}" title="${escapeHTML(course.rushReason)}">搶課難度 ${escapeHTML(course.rush)}</span>`}
+            </div>
+            <small class="course-rush-reason">${course.fixed ? "你已鎖定這門課，AI 只會調整其餘推薦。" : escapeHTML(course.rushReason)}</small>
+          </div>
         </article>
-      `
-    )
+      `;
+    })
     .join("");
 
   const reasons = [
+    fixedCourses.length ? `先鎖定 ${fixedCourses.length} 門必修／已選課，再用剩餘 ${recommendedCourseTarget} 個位置做推薦。` : "目前沒有固定課程，AI 可在全部位置中尋找最佳組合。",
     state.goal === "career"
       ? `優先保留能產出作品或職場案例的課程，讓「${track.label}」方向更容易放進履歷。`
       : state.goal === "safe"
         ? "優先安排基礎與必修示例課，降低延後先修鏈的風險。"
         : "在核心課之外保留跨學科課程，讓你能測試新興趣。",
-    state.avoidMorning && morningCount === 0 ? "方案避開了上午 9 點前的課，符合你的作息偏好。" : "有一門較早時段課被保留，因為它對目前目標的權重較高。",
-    state.freeFriday && fridayCount === 0 ? "星期五已空出，可用於實習、活動或集中完成作業。" : "課程分散在不同上課日，避免同一天堆疊過多高負擔任務。",
+    earlyCount === 0 ? "方案符合你設定的最早上課時間。" : `仍保留 ${earlyCount} 門較早時段課，因為它們對目前目標的權重較高。`,
+    state.preferredFreeDay
+      ? freeDayCount === 0
+        ? `${state.preferredFreeDay}已空出，可用於實習、活動或集中完成作業。`
+        : `${state.preferredFreeDay}仍有 ${freeDayCount} 門課，AI 已降低它們的排序權重。`
+      : state.compactDays
+        ? "AI 優先選擇可集中上課日的組合，減少零碎通勤。"
+        : "課程分散在不同上課日，保留較均勻的學習節奏。",
     state.balancedLoad ? `高負擔課程控制在 ${highLoadCount} 門，其餘用中低負擔課平衡。` : "本方案更重視目標匹配，未主動壓低小組作業與閱讀量。",
+    state.groupWorkTolerance === "low" ? `小組型課程控制在 ${groupCourseCount} 門。` : `目前組合包含 ${groupCourseCount} 門小組或工作室課程。`,
+    state.finalExamPreference === "avoid"
+      ? `方案把有 Final Exam 的課程控制在 ${finalExamCount} 門。`
+      : state.finalExamPreference === "allowOne"
+        ? `方案優先把 Final Exam 控制在 1 門內，目前為 ${finalExamCount} 門。`
+        : state.finalExamPreference === "prefer"
+          ? `方案偏好考試型評核，目前有 ${finalExamCount} 門設有 Final Exam。`
+          : `目前有 ${finalExamCount} 門設有 Final Exam。`,
+    state.avoidTightGaps && tightGapCount === 0 ? "同日課程之間保留了至少 45 分鐘轉場時間。" : "同日課程較集中，請留意課室距離與休息時間。",
   ];
   document.querySelector("#plannerReasons").innerHTML = reasons.map((reason) => `<li>${escapeHTML(reason)}</li>`).join("");
 
@@ -712,10 +1116,20 @@ function renderPlannerPlan() {
     "課程名稱、時段與名額目前為 MVP 示例，提交前必須回校方系統核對。",
     "AI 不會代替你登入教務系統，也不會自動提交或退選課程。",
   ];
-  if (morningCount && state.avoidMorning) warnings.unshift(`${morningCount} 門課未能滿足「避免早課」偏好，請比較其他班次。`);
-  if (fridayCount && state.freeFriday) warnings.unshift(`${fridayCount} 門課仍在星期五，因為目前示例選項不足。`);
+  if (earlyCount) warnings.unshift(`${earlyCount} 門課早於你設定的開始時間，請比較其他班次。`);
+  if (lateCount) warnings.unshift(`${lateCount} 門課晚於你設定的結束時間，請確認回程安排。`);
+  if (freeDayCount) warnings.unshift(`${freeDayCount} 門課仍在${state.preferredFreeDay}，因為目前示例選項不足。`);
+  if (weeklyHours > state.maxWeeklyHours) warnings.unshift(`預計每週投入 ${weeklyHours} 小時，高於你設定的 ${state.maxWeeklyHours} 小時上限。`);
+  if (fixedCourses.length > state.targetCourses) warnings.unshift(`你已加入 ${fixedCourses.length} 門固定課，超過目標 ${state.targetCourses} 門；AI 不會刪除你的固定課。`);
+  if (hardConflictCount) warnings.unshift(`發現 ${hardConflictCount} 組時間重疊，請先調整固定課或選擇其他班次。`);
+  if (state.finalExamPreference === "avoid" && finalExamCount) warnings.unshift(`仍有 ${finalExamCount} 門包含 Final Exam，因固定課或目標學分限制未能完全避開。`);
+  if (state.finalExamPreference === "allowOne" && finalExamCount > 1) warnings.unshift(`目前有 ${finalExamCount} 門包含 Final Exam，高於你設定的最多 1 門。`);
+  if (totalCredits < state.targetCredits) warnings.unshift(`目前示例組合為 ${totalCredits} 學分，仍低於最少目標 ${state.targetCredits} 學分。`);
+  if (highRushCount) warnings.unshift(`${highRushCount} 門課預測搶課難度高，建議預先收藏替代課或班次。`);
+  if (state.avoidTightGaps && tightGapCount) warnings.unshift(`${tightGapCount} 組課程的轉場少於 45 分鐘，請確認課室距離。`);
   if (highLoadCount >= 2) warnings.unshift("同時修讀多門高負擔課可能形成期中作業高峰，建議再查看評核日期。 ");
   document.querySelector("#plannerWarnings").innerHTML = warnings.map((warning) => `<li>${escapeHTML(warning)}</li>`).join("");
+  renderTimetableImage(selected, school, state);
 }
 
 const POINT_SYSTEM_VERSION = "liumer-points-v3";
@@ -1767,6 +2181,62 @@ document.querySelectorAll(".nav-item").forEach((item) => {
 document.querySelector("#saveSettings").addEventListener("click", saveUserSettings);
 document.querySelector("#settingsRegister").addEventListener("click", () => openDialog(document.querySelector("#registerDialog")));
 
+document.querySelector("#addFixedCourse").addEventListener("click", () => {
+  const title = document.querySelector("#fixedCourseName").value.trim();
+  const day = document.querySelector("#fixedCourseDay").value;
+  const start = document.querySelector("#fixedCourseStart").value;
+  const end = document.querySelector("#fixedCourseEnd").value;
+  const credits = Number(document.querySelector("#fixedCourseCredits").value);
+  const finalExam = document.querySelector("#fixedCourseExam").value === "true";
+  if (!title) {
+    showToast("請先輸入必修或已選課程名稱。");
+    return;
+  }
+  if (!start || !end || timeToMinutes(start) >= timeToMinutes(end)) {
+    showToast("請檢查固定課程的開始和結束時間。");
+    return;
+  }
+  const durationHours = Math.max(1, (timeToMinutes(end) - timeToMinutes(start)) / 60);
+  fixedCourses.push({
+    title,
+    type: "必修／已選",
+    day,
+    time: `${start}–${end}`,
+    startMinutes: timeToMinutes(start),
+    endMinutes: timeToMinutes(end),
+    hours: Math.ceil(durationHours + 3),
+    load: "固定",
+    credits,
+    finalExam,
+    fixed: true,
+    description: "你已選定或必須修讀的課程，AI 會保留時段並安排其餘課程。",
+    goals: ["safe", "career", "explore"],
+  });
+  document.querySelector("#fixedCourseName").value = "";
+  renderFixedCourses();
+  renderPlannerPlan();
+  showToast("已鎖定課程，AI 已重新安排剩餘課程。");
+});
+
+document.querySelector("#fixedCourseList").addEventListener("click", (event) => {
+  const removeButton = event.target.closest(".fixed-course-remove");
+  if (!removeButton) return;
+  fixedCourses.splice(Number(removeButton.dataset.fixedIndex), 1);
+  renderFixedCourses();
+  renderPlannerPlan();
+  showToast("已移除固定課程並更新方案。");
+});
+
+document.querySelector("#downloadTimetable").addEventListener("click", () => {
+  const image = document.querySelector("#timetableImage");
+  if (!image.src) return;
+  const link = document.createElement("a");
+  link.href = image.src;
+  link.download = "liumer-ai-timetable.png";
+  link.click();
+  showToast("周課表 PNG 已準備下載。");
+});
+
 document.querySelector("#plannerForm").addEventListener("submit", (event) => {
   event.preventDefault();
   plannerVariation += 1;
@@ -1780,11 +2250,30 @@ document.querySelector("#regeneratePlan").addEventListener("click", () => {
   showToast("已換一組排序，提交前請回學校正式系統核對。");
 });
 
-document.querySelectorAll("#plannerSchool, #plannerYear, #plannerTrack, input[name='plannerGoal'], #avoidMorning, #freeFriday, #balancedLoad").forEach((control) => {
+document.querySelector("#plannerSchool").addEventListener("change", () => {
+  renderPlannerPlan();
+});
+
+document.querySelector("#targetCourses").addEventListener("change", () => {
+  renderPlannerPlan();
+});
+
+document.querySelector("#targetCredits").addEventListener("change", () => {
+  renderPlannerPlan();
+});
+
+document.querySelectorAll("#plannerYear, #plannerTrack, input[name='plannerGoal'], #preferredFreeDay, #earliestStart, #latestEnd, #maxWeeklyHours, #groupWorkTolerance, #finalExamPreference, #balancedLoad, #compactDays, #avoidTightGaps").forEach((control) => {
   control.addEventListener("change", renderPlannerPlan);
 });
 
 document.body.addEventListener("click", (event) => {
+  const courseReviewLink = event.target.closest(".course-review-link");
+  if (courseReviewLink) {
+    event.stopPropagation();
+    renderTopicDetail(Number(courseReviewLink.dataset.questionIndex));
+    showToast("已跳到提到這門課的社區討論，可查看同學背景與完整評價。");
+    return;
+  }
   const partnerCta = event.target.closest(".partner-cta");
   if (partnerCta) {
     event.stopPropagation();
@@ -1924,4 +2413,6 @@ renderQuestions();
 renderCards("#eventsList", events, "報名", "join-btn");
 renderCards("#storeList", storeItems, "兌換", "redeem-btn");
 renderLevels();
+populateTargetCreditOptions();
+renderFixedCourses();
 renderPlannerPlan();

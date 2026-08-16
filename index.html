@@ -175,6 +175,7 @@
                     <option value="cityu">香港城市大學 CityU</option>
                     <option value="polyu">香港理工大學 PolyU</option>
                     <option value="hkbu">香港浸會大學 HKBU</option>
+                    <option value="eduhk">香港教育大學 EdUHK</option>
                     <option value="lu" selected>嶺南大學 LU</option>
                   </select>
                 </label>
@@ -200,6 +201,75 @@
                 </select>
               </label>
 
+              <div class="planner-field-row planner-target-row">
+                <label>
+                  目標修讀門數
+                  <select id="targetCourses">
+                    <option value="1">1 門</option>
+                    <option value="2">2 門</option>
+                    <option value="3">3 門</option>
+                    <option value="4" selected>4 門</option>
+                    <option value="5">5 門</option>
+                    <option value="6">6 門</option>
+                    <option value="7">7 門</option>
+                    <option value="8">8 門</option>
+                  </select>
+                </label>
+                <label>
+                  最少目標學分
+                  <select id="targetCredits" aria-label="最少目標學分"></select>
+                </label>
+              </div>
+
+              <fieldset class="fixed-course-builder">
+                <legend>已選／必修課</legend>
+                <p>先加入不能更改的課程，AI 會避開衝堂，再補齊剩餘門數與學分。</p>
+                <div class="fixed-course-grid">
+                  <label class="fixed-course-name">
+                    課程名稱
+                    <input id="fixedCourseName" placeholder="例如：大學英文寫作" />
+                  </label>
+                  <label>
+                    星期
+                    <select id="fixedCourseDay">
+                      <option value="星期一">星期一</option>
+                      <option value="星期二">星期二</option>
+                      <option value="星期三">星期三</option>
+                      <option value="星期四">星期四</option>
+                      <option value="星期五">星期五</option>
+                    </select>
+                  </label>
+                  <label>
+                    開始
+                    <input id="fixedCourseStart" type="time" value="09:30" />
+                  </label>
+                  <label>
+                    結束
+                    <input id="fixedCourseEnd" type="time" value="11:20" />
+                  </label>
+                  <label>
+                    學分
+                    <select id="fixedCourseCredits">
+                      <option value="1">1 學分</option>
+                      <option value="2">2 學分</option>
+                      <option value="3" selected>3 學分</option>
+                      <option value="4">4 學分</option>
+                      <option value="5">5 學分</option>
+                      <option value="6">6 學分</option>
+                    </select>
+                  </label>
+                  <label>
+                    期末評核
+                    <select id="fixedCourseExam">
+                      <option value="false">沒有 Final Exam</option>
+                      <option value="true">有 Final Exam</option>
+                    </select>
+                  </label>
+                </div>
+                <button class="ghost-action fixed-course-add" id="addFixedCourse" type="button">＋ 加入已選課程</button>
+                <div class="fixed-course-list" id="fixedCourseList" aria-live="polite"></div>
+              </fieldset>
+
               <fieldset class="planner-goals">
                 <legend>這學期最重要的目標</legend>
                 <div class="goal-options">
@@ -211,9 +281,72 @@
 
               <fieldset class="planner-preferences">
                 <legend>時間與壓力偏好</legend>
-                <label class="planner-check"><input id="avoidMorning" type="checkbox" checked /><span><b>避免早上 9 點前上課</b><small>AI 會優先尋找較晚時段</small></span></label>
-                <label class="planner-check"><input id="freeFriday" type="checkbox" /><span><b>盡量空出星期五</b><small>方便實習、活動或集中自習</small></span></label>
+                <div class="planner-custom-grid">
+                  <label>
+                    盡量空出
+                    <select id="preferredFreeDay">
+                      <option value="">無指定星期</option>
+                      <option value="星期一">星期一</option>
+                      <option value="星期二">星期二</option>
+                      <option value="星期三">星期三</option>
+                      <option value="星期四">星期四</option>
+                      <option value="星期五">星期五</option>
+                    </select>
+                  </label>
+                  <label>
+                    最早上課時間
+                    <select id="earliestStart">
+                      <option value="08:00">08:00 後</option>
+                      <option value="09:00" selected>09:00 後</option>
+                      <option value="10:00">10:00 後</option>
+                      <option value="11:00">11:00 後</option>
+                    </select>
+                  </label>
+                  <label>
+                    最晚上課結束
+                    <select id="latestEnd">
+                      <option value="17:00">17:00 前</option>
+                      <option value="18:30" selected>18:30 前</option>
+                      <option value="20:00">20:00 前</option>
+                      <option value="23:59">不限制</option>
+                    </select>
+                  </label>
+                  <label>
+                    每週投入上限
+                    <select id="maxWeeklyHours">
+                      <option value="18">約 18 小時</option>
+                      <option value="21">約 21 小時</option>
+                      <option value="24">約 24 小時</option>
+                      <option value="27">約 27 小時</option>
+                      <option value="30" selected>約 30 小時</option>
+                      <option value="33">約 33 小時</option>
+                      <option value="36">約 36 小時</option>
+                      <option value="40">約 40 小時</option>
+                      <option value="45">約 45 小時</option>
+                      <option value="99">不限制</option>
+                    </select>
+                  </label>
+                  <label>
+                    小組作業接受度
+                    <select id="groupWorkTolerance">
+                      <option value="low">盡量少小組作業</option>
+                      <option value="balanced" selected>個人與小組平衡</option>
+                      <option value="high">可接受多門小組課</option>
+                    </select>
+                  </label>
+                  <label>
+                    Final Exam 偏好
+                    <select id="finalExamPreference">
+                      <option value="any">不限制</option>
+                      <option value="avoid">盡量沒有 Final Exam</option>
+                      <option value="allowOne">最多 1 門有 Final Exam</option>
+                      <option value="prefer">偏好以 Final Exam 評核</option>
+                    </select>
+                  </label>
+                </div>
                 <label class="planner-check"><input id="balancedLoad" type="checkbox" checked /><span><b>平衡閱讀與小組作業</b><small>避免多門高負擔課同時出現</small></span></label>
+                <label class="planner-check"><input id="compactDays" type="checkbox" /><span><b>盡量集中上課日</b><small>把課程集中在較少星期，留出完整自習日</small></span></label>
+                <label class="planner-check"><input id="avoidTightGaps" type="checkbox" checked /><span><b>避免過密連堂</b><small>同一天的課程之間至少保留轉場與休息時間</small></span></label>
               </fieldset>
 
               <button class="primary-action planner-generate" id="generatePlan" type="submit">生成 AI 選課方案</button>
@@ -243,6 +376,14 @@
                   <span id="creditSummary">4 門 · 12 學分</span>
                 </div>
                 <div class="course-plan-list" id="coursePlanList"></div>
+              </section>
+
+              <section class="panel timetable-visual-panel">
+                <div class="panel-title">
+                  <div><h3>AI 周課表圖像</h3><span>包含已選課程與 AI 推薦</span></div>
+                  <button class="ghost-action" id="downloadTimetable" type="button">下載 PNG</button>
+                </div>
+                <img id="timetableImage" alt="AI 生成的星期一至星期五周課表" />
               </section>
 
               <div class="ai-explain-grid">
