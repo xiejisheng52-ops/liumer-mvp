@@ -165,7 +165,9 @@
                 <span>約 30 秒完成</span>
               </div>
 
-              <div class="planner-field-row">
+              <fieldset class="planner-section planner-basics">
+                <legend><span class="section-index">1</span><strong>基本選課條件</strong><small class="section-status">必填</small></legend>
+                <div class="planner-field-row">
                 <label>
                   就讀高校
                   <select id="plannerSchool">
@@ -189,40 +191,41 @@
                     <option value="pg">授課型研究生</option>
                   </select>
                 </label>
-              </div>
+                </div>
 
-              <label>
-                學習方向
-                <select id="plannerTrack">
-                  <option value="data">計算機、AI 與數據</option>
-                  <option value="business">商科、金融與創業</option>
-                  <option value="policy" selected>社會科學與公共政策</option>
-                  <option value="creative">傳理、設計與創意</option>
-                </select>
-              </label>
-
-              <div class="planner-field-row planner-target-row">
                 <label>
-                  目標修讀門數
-                  <select id="targetCourses">
-                    <option value="1">1 門</option>
-                    <option value="2">2 門</option>
-                    <option value="3">3 門</option>
-                    <option value="4" selected>4 門</option>
-                    <option value="5">5 門</option>
-                    <option value="6">6 門</option>
-                    <option value="7">7 門</option>
-                    <option value="8">8 門</option>
+                  學習方向
+                  <select id="plannerTrack">
+                    <option value="data">計算機、AI 與數據</option>
+                    <option value="business">商科、金融與創業</option>
+                    <option value="policy" selected>社會科學與公共政策</option>
+                    <option value="creative">傳理、設計與創意</option>
                   </select>
                 </label>
-                <label>
-                  最少目標學分
-                  <select id="targetCredits" aria-label="最少目標學分"></select>
-                </label>
-              </div>
 
-              <fieldset class="fixed-course-builder">
-                <legend>已選／必修課</legend>
+                <div class="planner-field-row planner-target-row">
+                  <label>
+                    目標修讀門數
+                    <select id="targetCourses">
+                      <option value="1">1 門</option>
+                      <option value="2">2 門</option>
+                      <option value="3">3 門</option>
+                      <option value="4" selected>4 門</option>
+                      <option value="5">5 門</option>
+                      <option value="6">6 門</option>
+                      <option value="7">7 門</option>
+                      <option value="8">8 門</option>
+                    </select>
+                  </label>
+                  <label>
+                    最少目標學分
+                    <select id="targetCredits" aria-label="最少目標學分"></select>
+                  </label>
+                </div>
+              </fieldset>
+
+              <fieldset class="planner-section fixed-course-builder">
+                <legend><span class="section-index">2</span><strong>已選／必修課</strong><small class="section-status optional">選填</small></legend>
                 <p>先加入不能更改的課程，AI 會避開衝堂，再補齊剩餘門數與學分。</p>
                 <div class="fixed-course-grid">
                   <label class="fixed-course-name">
@@ -270,8 +273,8 @@
                 <div class="fixed-course-list" id="fixedCourseList" aria-live="polite"></div>
               </fieldset>
 
-              <fieldset class="planner-goals">
-                <legend>這學期最重要的目標</legend>
+              <fieldset class="planner-section planner-goals">
+                <legend><span class="section-index">3</span><strong>這學期最重要的目標</strong><small class="section-status">必選</small></legend>
                 <div class="goal-options">
                   <label><input type="radio" name="plannerGoal" value="safe" /><span><b>穩妥畢業</b><small>先滿足必修與先修要求</small></span></label>
                   <label><input type="radio" name="plannerGoal" value="career" checked /><span><b>求職導向</b><small>強化作品集與職場能力</small></span></label>
@@ -279,8 +282,8 @@
                 </div>
               </fieldset>
 
-              <fieldset class="planner-preferences">
-                <legend>時間與壓力偏好</legend>
+              <fieldset class="planner-section planner-preferences">
+                <legend><span class="section-index">4</span><strong>時間與壓力偏好</strong><small class="section-status adjustable">可調整</small></legend>
                 <div class="planner-custom-grid">
                   <label>
                     盡量空出
