@@ -1138,6 +1138,13 @@ h1 {
   gap: 16px;
 }
 
+.right-rail {
+  align-self: start;
+  align-content: start;
+  align-items: start;
+  grid-auto-rows: max-content;
+}
+
 .search-heading,
 .settings-heading {
   padding-bottom: 18px;

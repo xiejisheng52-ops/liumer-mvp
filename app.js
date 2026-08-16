@@ -1208,6 +1208,33 @@ const interfaceCopy = {
     heroTitle: "我是小留",
     shuffleTip: "換一句",
     topicHeading: "精準話題",
+    tips: [
+      "先問清楚你的學校、預算和時間，我再幫你把答案分成馬上做、可以等、不要踩三類。",
+      "租房問題要寫清楚預算、通勤地點和可接受室友數，大家會更容易給你真實建議。",
+      "畢業二手交易記得標明交收地點、物品狀態和原價，信任感會高很多。",
+      "不要只收藏資訊，找一個同學一起去實測，留學體驗會完全不一樣。",
+    ],
+    commonTitle: "留學生常用入口",
+    commonHint: "校園生活工具箱",
+    commonEntries: [
+      ["AI 選課沙盤", "先模擬課表，再進學校系統選課"],
+      ["校園郵箱認證", "用學校郵箱加入學生社群"],
+      ["高校圈", "查看港大、中大、科大等院校帖"],
+      ["到港清單", "電話卡、銀行、住宿、選課"],
+      ["學生禮遇", "咖啡、餐飲、文化活動的合作福利"],
+    ],
+    taskTitle: "本週任務",
+    taskHint: "積分激勵",
+    taskItems: ["完成校園郵箱認證（一次）", "發布完整問題（每日首 2 條）", "提供 40 字以上經驗（每日首 3 條）", "活動到場簽到"],
+    memberTitle: "會員等級",
+    currentLevelPrefix: "目前",
+    memberLevels: [
+      { level: "Lv.1 新來小留", standard: "0-179 積分", benefits: "瀏覽全部話題、收藏內容、報名免費活動" },
+      { level: "Lv.2 探路小留", standard: "180-499 積分", benefits: "完成認證後可兌換貼紙、咖啡券和實用清單" },
+      { level: "Lv.3 實測小留", standard: "500-999 積分", benefits: "熱門活動優先候補、二手內容優先展示" },
+      { level: "Lv.4 小留夥伴", standard: "1000-1799 積分", benefits: "活動優先報名、CV 診斷與二手置頂福利" },
+      { level: "Lv.5 社群嚮導", standard: "1800+ 積分", benefits: "可申請帶隊活動、參與內測與社群共創" },
+    ],
     searchEyebrow: "全站搜尋",
     searchEmptyTitle: "輸入關鍵字開始搜尋",
     searchSummary: "可搜尋社區帖子、評論、在地活動與 L-Store 福利。",
@@ -1274,6 +1301,33 @@ const interfaceCopy = {
     heroTitle: "我是小留",
     shuffleTip: "换一句",
     topicHeading: "精准话题",
+    tips: [
+      "先说清楚你的学校、预算和时间，我再帮你把答案分成立即行动、可以等待和需要避坑三类。",
+      "租房问题要写清预算、通勤地点和可接受的室友人数，大家会更容易给出真实建议。",
+      "毕业二手交易记得标明交收地点、物品状态和原价，信任感会高很多。",
+      "不要只收藏信息，找一位同学一起实测，留学体验会完全不一样。",
+    ],
+    commonTitle: "留学生常用入口",
+    commonHint: "校园生活工具箱",
+    commonEntries: [
+      ["AI 选课沙盘", "先模拟课表，再进入学校系统选课"],
+      ["校园邮箱认证", "使用学校邮箱加入学生社区"],
+      ["高校圈", "查看港大、中大、科大等院校帖子"],
+      ["到港清单", "电话卡、银行、住宿、选课"],
+      ["学生礼遇", "咖啡、餐饮、文化活动的合作福利"],
+    ],
+    taskTitle: "本周任务",
+    taskHint: "积分激励",
+    taskItems: ["完成校园邮箱认证（一次）", "发布完整问题（每日前 2 条）", "提供 40 字以上经验（每日前 3 条）", "活动到场签到"],
+    memberTitle: "会员等级",
+    currentLevelPrefix: "当前",
+    memberLevels: [
+      { level: "Lv.1 新来小留", standard: "0-179 积分", benefits: "浏览全部话题、收藏内容、报名免费活动" },
+      { level: "Lv.2 探路小留", standard: "180-499 积分", benefits: "完成认证后可兑换贴纸、咖啡券和实用清单" },
+      { level: "Lv.3 实测小留", standard: "500-999 积分", benefits: "热门活动优先候补、二手内容优先展示" },
+      { level: "Lv.4 小留伙伴", standard: "1000-1799 积分", benefits: "活动优先报名、CV 诊断与二手置顶福利" },
+      { level: "Lv.5 社区向导", standard: "1800+ 积分", benefits: "可申请带队活动、参与内测与社区共创" },
+    ],
     searchEyebrow: "全站搜索",
     searchEmptyTitle: "输入关键词开始搜索",
     searchSummary: "可搜索社区帖子、评论、在地活动与 L-Store 福利。",
@@ -1340,6 +1394,33 @@ const interfaceCopy = {
     heroTitle: "Hi, I am Liumer",
     shuffleTip: "New tip",
     topicHeading: "Focused Topics",
+    tips: [
+      "Tell me your school, budget, and timing first. I will sort the advice into act now, can wait, and avoid.",
+      "For housing questions, include your budget, commute destination, and preferred number of flatmates to get more useful advice.",
+      "For graduate resale posts, include the pickup location, condition, and original price to build trust.",
+      "Do not just bookmark information. Try it with another student and turn advice into your own Hong Kong experience.",
+    ],
+    commonTitle: "Student Shortcuts",
+    commonHint: "Campus life toolkit",
+    commonEntries: [
+      ["AI Course Planner", "Simulate a timetable before using your school system"],
+      ["Campus Email Verification", "Join the student community with your school email"],
+      ["School Circles", "Browse posts from HKU, CUHK, HKUST, and more"],
+      ["Arrival Checklist", "SIM card, banking, housing, and course enrolment"],
+      ["Student Perks", "Partner offers for coffee, dining, and culture"],
+    ],
+    taskTitle: "Weekly Tasks",
+    taskHint: "Earn Liumer Points",
+    taskItems: ["Verify your campus email (one time)", "Post a complete question (first 2 daily)", "Share 40+ characters of experience (first 3 daily)", "Check in at an event"],
+    memberTitle: "Member Levels",
+    currentLevelPrefix: "Current",
+    memberLevels: [
+      { level: "Lv.1 Newcomer", standard: "0-179 points", benefits: "Browse all topics, save content, and join free events" },
+      { level: "Lv.2 Explorer", standard: "180-499 points", benefits: "After verification, redeem stickers, coffee vouchers, and practical guides" },
+      { level: "Lv.3 Field Tester", standard: "500-999 points", benefits: "Priority waitlist for popular events and better visibility for resale posts" },
+      { level: "Lv.4 Community Partner", standard: "1000-1799 points", benefits: "Priority event registration, CV review, and resale post boosts" },
+      { level: "Lv.5 Community Guide", standard: "1800+ points", benefits: "Apply to lead events, join beta tests, and co-create the community" },
+    ],
     searchEyebrow: "Site Search",
     searchEmptyTitle: "Enter a keyword to start searching",
     searchSummary: "Search community posts, comments, local events, and L-Store perks.",
@@ -1469,8 +1550,23 @@ function applyLanguageToUI() {
   setText("#openPlanner", copy.plannerCta);
   setText("#openAsk", copy.askCta);
   setText(".hero-strip h2", copy.heroTitle);
+  setText("#liumerLine", copy.tips[0]);
   setText("#shuffleTip", copy.shuffleTip);
   setText("#homeView .section-head h2", copy.topicHeading);
+  setText("#homeView .right-rail .panel:nth-child(1) .panel-title h3", copy.commonTitle);
+  setText("#homeView .right-rail .panel:nth-child(1) .panel-title span", copy.commonHint);
+  document.querySelectorAll("#homeView .campus-list button").forEach((button, index) => {
+    const entry = copy.commonEntries[index];
+    if (!entry) return;
+    setText(`#homeView .campus-list button:nth-child(${index + 1}) strong`, entry[0]);
+    setText(`#homeView .campus-list button:nth-child(${index + 1}) span`, entry[1]);
+  });
+  setText("#homeView .right-rail .panel:nth-child(2) .panel-title h3", copy.taskTitle);
+  setText("#homeView .right-rail .panel:nth-child(2) .panel-title span", copy.taskHint);
+  document.querySelectorAll("#homeView .task-list li > span").forEach((item, index) => {
+    if (copy.taskItems[index]) item.textContent = copy.taskItems[index];
+  });
+  setText("#homeView .right-rail .panel:nth-child(3) .panel-title h3", copy.memberTitle);
   setText("#searchView .eyebrow", copy.searchEyebrow);
   setText("#searchTitle", copy.searchEmptyTitle);
   setText("#searchSummary", copy.searchSummary);
@@ -1503,6 +1599,8 @@ function applyLanguageToUI() {
   setText(".settings-actions p", copy.settingsNote);
   setText("#saveSettings", copy.saveSettings);
   updateSettingsStatus();
+  renderLevels();
+  refreshPointsUI();
 }
 
 function escapeHTML(value = "") {
@@ -1548,11 +1646,12 @@ function saveState() {
 }
 
 function getMemberLevel() {
-  if (points >= 1800) return memberLevels[4];
-  if (points >= 1000) return memberLevels[3];
-  if (points >= 500) return memberLevels[2];
-  if (points >= 180) return memberLevels[1];
-  return memberLevels[0];
+  const levels = currentCopy().memberLevels || memberLevels;
+  if (points >= 1800) return levels[4];
+  if (points >= 1000) return levels[3];
+  if (points >= 500) return levels[2];
+  if (points >= 180) return levels[1];
+  return levels[0];
 }
 
 function showToast(message) {
@@ -1583,10 +1682,11 @@ function grantDailyReward(action, amount, dailyLimit) {
 }
 
 function refreshPointsUI() {
+  const copy = currentCopy();
   const level = getMemberLevel();
   pointsBalance.textContent = points;
   currentLevel.textContent = level.level;
-  document.querySelector("#miniLevelStatus").textContent = `目前 ${level.level}`;
+  document.querySelector("#miniLevelStatus").textContent = `${copy.currentLevelPrefix} ${level.level}`;
   document.querySelector("#profileLevelBadge").textContent = level.level;
   storePoints.textContent = points;
 
@@ -1995,12 +2095,13 @@ function claimPartnerOffer() {
 }
 
 function renderLevels() {
-  document.querySelector("#miniLevels").innerHTML = memberLevels
+  const levels = currentCopy().memberLevels || memberLevels;
+  document.querySelector("#miniLevels").innerHTML = levels
     .slice(0, 5)
     .map((item) => `<div><strong>${escapeHTML(item.level)}</strong><span>${escapeHTML(item.standard)}</span></div>`)
     .join("");
 
-  document.querySelector("#levelGrid").innerHTML = memberLevels
+  document.querySelector("#levelGrid").innerHTML = levels
     .map(
       (item) => `
         <article class="level-card">
@@ -2314,8 +2415,9 @@ document.querySelector("#topicDetail").addEventListener("click", async (event) =
 });
 
 document.querySelector("#shuffleTip").addEventListener("click", () => {
+  const localizedTips = currentCopy().tips || tips;
   const current = document.querySelector("#liumerLine").textContent;
-  const next = tips.find((tip) => tip !== current) || tips[0];
+  const next = localizedTips.find((tip) => tip !== current) || localizedTips[0];
   document.querySelector("#liumerLine").textContent = next;
 });
 
