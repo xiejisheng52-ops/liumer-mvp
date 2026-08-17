@@ -33,6 +33,7 @@
 
         <nav class="nav-list">
           <button class="nav-item active" data-view="home" type="button">社區問答</button>
+          <button class="nav-item ai-nav" data-view="aiAnswer" type="button"><span class="ai-nav-mark">AI</span> 小留智答</button>
           <button class="nav-item ai-nav" data-view="aiPlanner" type="button"><span class="ai-nav-mark">AI</span> 選課沙盤</button>
           <button class="nav-item" data-view="events" type="button">在地活動</button>
           <button class="nav-item" data-view="store" type="button">L-Store</button>
@@ -60,6 +61,7 @@
           </div>
           <div class="topbar-actions">
             <button class="ghost-action" id="openRegister" type="button">註冊 / 校園認證</button>
+            <button class="ghost-action ai-ask-action" id="openAiAnswer" type="button">小留智答</button>
             <button class="ai-action" id="openPlanner" type="button">AI 選課</button>
             <button class="primary-action" id="openAsk" type="button">發問</button>
           </div>
@@ -106,6 +108,7 @@
                 <span>校園生活工具箱</span>
               </div>
               <div class="campus-list">
+                <button class="ai-tool-entry" data-tool="ai-answer" type="button"><strong>小留智答</strong><span>AI 整理答案、官方來源與延伸追問</span></button>
                 <button class="ai-tool-entry" data-tool="ai-planner" type="button"><strong>AI 選課沙盤</strong><span>先模擬課表，再進學校系統選課</span></button>
                 <button data-tool="register" type="button"><strong>校園郵箱認證</strong><span>用學校郵箱加入學生社群</span></button>
                 <button data-tool="schools" type="button"><strong>高校圈</strong><span>查看港大、中大、科大等院校帖</span></button>
@@ -135,6 +138,34 @@
               <div class="mini-levels" id="miniLevels"></div>
             </section>
           </aside>
+        </section>
+
+        <section class="view ai-answer-view" id="aiAnswerView">
+          <section class="ai-answer-hero">
+            <div>
+              <p class="eyebrow" id="aiAnswerEyebrow">Liumer AI · 留學資訊整理</p>
+              <h2 id="aiAnswerHeading">問小留，先看重點，再核對官方來源。</h2>
+              <p id="aiAnswerIntro">把分散的申請、選課、租房與生活資訊整理成可追問的答案；重要日期與資格仍以官方網站為準。</p>
+            </div>
+            <img src="./assets/liumer-mascot-cutout.png" alt="Liumer 吉祥物小留" />
+          </section>
+
+          <form class="ai-query-bar" id="aiAnswerForm">
+            <label for="aiAnswerInput" id="aiAnswerLabel">你想了解什麼？</label>
+            <div>
+              <input id="aiAnswerInput" type="search" value="香港中文大學怎樣申請？" autocomplete="off" />
+              <button class="ai-action" id="submitAiAnswer" type="submit">整理答案</button>
+            </div>
+          </form>
+
+          <div class="ai-prompt-chips" id="aiPromptChips" aria-label="常見問題">
+            <button type="button" data-ai-query="香港中文大學怎樣申請？">大學申請</button>
+            <button type="button" data-ai-query="香港留學生租房要注意什麼？">租房避坑</button>
+            <button type="button" data-ai-query="香港大學選課怎樣避免衝堂？">選課安排</button>
+            <button type="button" data-ai-query="留學生在香港怎樣找實習？">實習準備</button>
+          </div>
+
+          <div class="ai-answer-output" id="aiAnswerOutput" aria-live="polite"></div>
         </section>
 
         <section class="view" id="aiPlannerView">
@@ -168,33 +199,69 @@
               <fieldset class="planner-section planner-basics">
                 <legend><span class="section-index">1</span><strong>基本選課條件</strong><small class="section-status">必填</small></legend>
                 <div class="planner-field-row">
-                <label>
-                  就讀高校
-                  <select id="plannerSchool">
-                    <option value="hku">香港大學 HKU</option>
-                    <option value="cuhk">香港中文大學 CUHK</option>
-                    <option value="hkust">香港科技大學 HKUST</option>
-                    <option value="cityu">香港城市大學 CityU</option>
-                    <option value="polyu">香港理工大學 PolyU</option>
-                    <option value="hkbu">香港浸會大學 HKBU</option>
-                    <option value="eduhk">香港教育大學 EdUHK</option>
-                    <option value="lu" selected>嶺南大學 LU</option>
-                  </select>
-                </label>
-                <label>
-                  年級
-                  <select id="plannerYear">
-                    <option value="1">Year 1</option>
-                    <option value="2" selected>Year 2</option>
-                    <option value="3">Year 3</option>
-                    <option value="4">Year 4 / Final Year</option>
-                    <option value="pg">授課型研究生</option>
-                  </select>
-                </label>
+                  <label>
+                    就讀高校
+                    <select id="plannerSchool">
+                      <option value="hku">香港大學 HKU</option>
+                      <option value="cuhk">香港中文大學 CUHK</option>
+                      <option value="hkust">香港科技大學 HKUST</option>
+                      <option value="cityu">香港城市大學 CityU</option>
+                      <option value="polyu">香港理工大學 PolyU</option>
+                      <option value="hkbu">香港浸會大學 HKBU</option>
+                      <option value="eduhk">香港教育大學 EdUHK</option>
+                      <option value="lu" selected>嶺南大學 LU</option>
+                    </select>
+                  </label>
+                  <label>
+                    所屬院系
+                    <select id="plannerFaculty" aria-label="所屬院系"></select>
+                  </label>
                 </div>
 
+                <div class="planner-field-row planner-cohort-row">
+                  <label>
+                    入學學年
+                    <select id="plannerCohort">
+                      <option value="2022-23">2022–23</option>
+                      <option value="2023-24">2023–24</option>
+                      <option value="2024-25">2024–25</option>
+                      <option value="2025-26" selected>2025–26</option>
+                      <option value="2026-27">2026–27</option>
+                    </select>
+                  </label>
+                  <label>
+                    修讀階段
+                    <select id="plannerYear">
+                      <option value="1">Year 1</option>
+                      <option value="2" selected>Year 2</option>
+                      <option value="3">Year 3</option>
+                      <option value="4">Year 4 / Final Year</option>
+                      <option value="pgTaught">授課型碩士</option>
+                      <option value="pgResearch">研究型碩士 MPhil</option>
+                      <option value="phd">博士 PhD</option>
+                    </select>
+                  </label>
+                </div>
+
+                <label id="plannerEntryRouteField">
+                  入學路徑
+                  <select id="plannerEntryRoute">
+                    <option value="standard" selected>四年制本科（Year 1 入學）</option>
+                    <option value="associate">副學士銜接學士（通常 Year 3 入學／約 2 年）</option>
+                    <option value="higherDiploma">高級文憑銜接學士（通常 Year 3 入學／約 2 年）</option>
+                    <option value="transfer">其他院校轉學／學分轉移</option>
+                  </select>
+                  <small class="planner-field-help" id="entryRouteHelp">按完整四年制學位要求規劃。</small>
+                </label>
+
                 <label>
-                  學習方向
+                  就讀專業
+                  <input id="plannerMajor" list="plannerMajorOptions" placeholder="輸入或選擇專業，例如：社會科學" autocomplete="off" />
+                  <datalist id="plannerMajorOptions"></datalist>
+                </label>
+
+                <label>
+                  AI 推薦方向
                   <select id="plannerTrack">
                     <option value="data">計算機、AI 與數據</option>
                     <option value="business">商科、金融與創業</option>
@@ -202,6 +269,8 @@
                     <option value="creative">傳理、設計與創意</option>
                   </select>
                 </label>
+
+                <section class="degree-requirement-summary" id="degreeRequirementSummary" aria-live="polite"></section>
 
                 <div class="planner-field-row planner-target-row">
                   <label>

@@ -651,15 +651,299 @@ const tips = [
   "不要只收藏資訊，找一個同學一起去實測，留學體驗會完全不一樣。",
 ];
 
+const aiAnswerSources = {
+  admissions: [
+    { title: "CUHK Undergraduate Admissions", meta: "香港中文大學 · 本科招生", url: "https://admission.cuhk.edu.hk/" },
+    { title: "CUHK Graduate School", meta: "香港中文大學 · 研究院", url: "https://www.gs.cuhk.edu.hk/" },
+    { title: "Student visa / entry permit", meta: "香港入境事務處", url: "https://www.immd.gov.hk/eng/services/visas/study.html" },
+  ],
+  housing: [
+    { title: "Tenancy Matters", meta: "香港差餉物業估價署", url: "https://www.rvd.gov.hk/en/our_services/tenancy_matters.html" },
+    { title: "Estate Agents Authority", meta: "香港地產代理監管局", url: "https://www.eaa.org.hk/" },
+    { title: "Consumer Council", meta: "香港消費者委員會", url: "https://www.consumer.org.hk/" },
+  ],
+  courses: [
+    { title: "HKU Student Information System", meta: "香港大學 · SIS", url: "https://sis-main.hku.hk/" },
+    { title: "CUHK CUSIS", meta: "香港中文大學 · 選課系統", url: "https://www.cuhk.edu.hk/cusis/" },
+    { title: "University Grants Committee", meta: "香港大學教育資助委員會", url: "https://www.ugc.edu.hk/" },
+  ],
+  careers: [
+    { title: "Immigration Arrangements for Non-local Graduates", meta: "香港入境事務處 · IANG", url: "https://www.immd.gov.hk/eng/services/visas/IANG.html" },
+    { title: "Interactive Employment Service", meta: "香港勞工處", url: "https://www.jobs.gov.hk/" },
+    { title: "Youth Employment Services", meta: "香港勞工處 · 青年就業", url: "https://www.yes.labour.gov.hk/" },
+  ],
+  general: [
+    { title: "GovHK", meta: "香港政府一站通", url: "https://www.gov.hk/" },
+    { title: "Education Bureau", meta: "香港教育局", url: "https://www.edb.gov.hk/" },
+    { title: "University Grants Committee", meta: "香港大學教育資助委員會", url: "https://www.ugc.edu.hk/" },
+  ],
+};
+
+const aiAnswerDetailSources = {
+  "admissions-undergrad": [aiAnswerSources.admissions[0], aiAnswerSources.admissions[2]],
+  "admissions-masters": [aiAnswerSources.admissions[1], aiAnswerSources.admissions[2]],
+  "admissions-visa": [aiAnswerSources.admissions[2]],
+  "housing-deposit": [aiAnswerSources.housing[0], aiAnswerSources.housing[2]],
+  "housing-agent": [aiAnswerSources.housing[1], aiAnswerSources.housing[2]],
+  "housing-contract": [aiAnswerSources.housing[0], aiAnswerSources.housing[1]],
+  "courses-fixed": [aiAnswerSources.courses[0], aiAnswerSources.courses[1]],
+  "courses-demand": [aiAnswerSources.courses[0], aiAnswerSources.courses[1]],
+  "courses-exam": [aiAnswerSources.courses[0], aiAnswerSources.courses[2]],
+  "careers-cv": [aiAnswerSources.careers[1], aiAnswerSources.careers[2]],
+  "careers-portfolio": [aiAnswerSources.careers[1], aiAnswerSources.careers[2]],
+  "careers-iang": [aiAnswerSources.careers[0], aiAnswerSources.careers[1]],
+};
+
+const aiAnswerLibrary = {
+  "zh-Hant": {
+    admissions: {
+      title: "香港高校申請要先分清學歷層次與申請通道。",
+      summary: "本科、授課型碩士與研究型學位的申請方式和時間線差異很大。先確認課程、身份與入學學期，再到院校官方系統建立申請。",
+      bullets: [
+        ["本科申請", "內地高考生通常依院校公布的內地招生安排申請；國際課程學生則按相應資格及招生通道遞交。"],
+        ["碩士申請", "重點核對學位背景、GPA、語言要求、推薦信、個人陳述，以及課程是否採分輪錄取。"],
+        ["博士申請", "先確認研究方向與導師匹配度，再準備研究計畫；部分項目鼓勵申請人預先聯絡導師。"],
+        ["錄取之後", "非本地生通常還需處理學生簽證、住宿、保險與註冊文件，應為審批預留時間。"],
+      ],
+      followups: ["香港中文大學本科有哪些申請通道？", "申請香港碩士通常要準備哪些材料？", "非本地生的學生簽證要多久？"],
+    },
+    housing: {
+      title: "租房先核對身份、合約與真實房況，再談價格。",
+      summary: "香港租房節奏快，但不應在未看房、未核實業主或代理身份、未讀清合約前支付大額款項。通勤成本也要和租金一起計算。",
+      bullets: [
+        ["核實放盤", "確認代理牌照、業主或授權文件、單位地址與用途，不只依賴社交平台截圖。"],
+        ["看清費用", "把按金、首期租金、代理佣金、水電網絡及可能的印花稅一併計入。"],
+        ["留下證據", "入住前拍攝牆面、家電、水壓與門鎖，將維修責任和物品清單寫入合約。"],
+        ["計算通勤", "以早晚高峰實測到校時間，留意尾班車與跨海交通，不只看地圖距離。"],
+      ],
+      followups: ["香港租房一般要付幾個月按金？", "怎樣核實地產代理牌照？", "合租時要把哪些條款寫進合約？"],
+    },
+    courses: {
+      title: "先鎖定必修與硬性規則，再用偏好排序選修課。",
+      summary: "選課最容易出錯的地方不是興趣，而是先修要求、課程衝堂、學分上限及不同學期的開課安排。AI 可以整理方案，但最後必須回校方系統確認。",
+      bullets: [
+        ["先放必修", "先輸入不能更改的必修課、已選課與固定活動，避免推薦方案建立在錯誤空檔上。"],
+        ["檢查規則", "逐門核對先修、互斥課程、年級限制、學分與畢業要求，不把往年資料當成當期規則。"],
+        ["平衡負擔", "同時考慮考試、閱讀、小組作業和通勤，避免多門高負擔課集中在同一週期。"],
+        ["準備備選", "熱門課程至少準備兩組替代方案，並記下候補與加退選截止日期。"],
+      ],
+      followups: ["怎樣把必修課加入 AI 選課沙盤？", "選課時怎樣判斷搶課難度？", "沒有 Final Exam 的課一定比較輕鬆嗎？"],
+    },
+    careers: {
+      title: "實習準備要同步處理職位匹配、作品證據與身份規則。",
+      summary: "先用學校就業中心、官方招聘平台和公司網站找職位，再針對職位改寫履歷。非本地生亦應確認實習、兼職與畢業後工作的身份要求。",
+      bullets: [
+        ["找對入口", "優先查看學校 Career Centre、公司官網、勞工處平台及可信校友渠道。"],
+        ["用證據說話", "把課堂專題、社團、研究或 Vibe Coding 原型整理成成果、角色和可量化影響。"],
+        ["針對職位修改", "履歷與求職信應回應職位描述中的技能與場景，不使用同一版本海投。"],
+        ["確認身份安排", "開始工作前向學校及入境處官方資料確認學生身份、實習與畢業後 IANG 安排。"],
+      ],
+      followups: ["香港實習履歷應該寫一頁還是兩頁？", "沒有本地工作經驗怎樣做作品集？", "IANG 申請前要準備什麼？"],
+    },
+  },
+};
+
+aiAnswerLibrary["zh-Hans"] = {
+  admissions: { title: "香港高校申请要先分清学历层次与申请通道。", summary: "本科、授课型硕士与研究型学位的申请方式和时间线差异很大。先确认课程、身份与入学学期，再到院校官方系统建立申请。", bullets: [["本科申请", "内地高考生通常依院校公布的内地招生安排申请；国际课程学生则按相应资格及招生通道递交。"], ["硕士申请", "重点核对学位背景、GPA、语言要求、推荐信、个人陈述，以及课程是否采用分轮录取。"], ["博士申请", "先确认研究方向与导师匹配度，再准备研究计划；部分项目鼓励申请人预先联系导师。"], ["录取之后", "非本地生通常还需处理学生签证、住宿、保险与注册文件，应为审批预留时间。"]], followups: ["香港中文大学本科有哪些申请通道？", "申请香港硕士通常要准备哪些材料？", "非本地生的学生签证要多久？"] },
+  housing: { title: "租房先核对身份、合同与真实房况，再谈价格。", summary: "香港租房节奏快，但不应在未看房、未核实业主或代理身份、未读清合同前支付大额款项。通勤成本也要和租金一起计算。", bullets: [["核实房源", "确认代理牌照、业主或授权文件、单位地址与用途，不只依赖社交平台截图。"], ["看清费用", "把押金、首期租金、代理佣金、水电网络及可能的印花税一并计入。"], ["留下证据", "入住前拍摄墙面、家电、水压与门锁，将维修责任和物品清单写入合同。"], ["计算通勤", "以早晚高峰实测到校时间，留意末班车与跨海交通，不只看地图距离。"]], followups: ["香港租房一般要付几个月押金？", "怎样核实地产代理牌照？", "合租时要把哪些条款写进合同？"] },
+  courses: { title: "先锁定必修与硬性规则，再用偏好排序选修课。", summary: "选课最容易出错的地方不是兴趣，而是先修要求、课程冲突、学分上限及不同学期的开课安排。AI 可以整理方案，但最后必须回校方系统确认。", bullets: [["先放必修", "先输入不能更改的必修课、已选课与固定活动，避免推荐方案建立在错误空档上。"], ["检查规则", "逐门核对先修、互斥课程、年级限制、学分与毕业要求，不把往年资料当成当期规则。"], ["平衡负担", "同时考虑考试、阅读、小组作业和通勤，避免多门高负担课集中在同一周期。"], ["准备备选", "热门课程至少准备两组替代方案，并记下候补与加退选截止日期。"]], followups: ["怎样把必修课加入 AI 选课沙盘？", "选课时怎样判断抢课难度？", "没有 Final Exam 的课一定比较轻松吗？"] },
+  careers: { title: "实习准备要同步处理职位匹配、作品证据与身份规则。", summary: "先用学校就业中心、官方招聘平台和公司网站找职位，再针对职位改写简历。非本地生也应确认实习、兼职与毕业后工作的身份要求。", bullets: [["找对入口", "优先查看学校 Career Centre、公司官网、劳工处平台及可信校友渠道。"], ["用证据说话", "把课堂项目、社团、研究或 Vibe Coding 原型整理成成果、角色和可量化影响。"], ["针对职位修改", "简历与求职信应回应职位描述中的技能与场景，不使用同一版本海投。"], ["确认身份安排", "开始工作前向学校及入境处官方资料确认学生身份、实习与毕业后 IANG 安排。"]], followups: ["香港实习简历应该写一页还是两页？", "没有本地工作经验怎样做作品集？", "IANG 申请前要准备什么？"] },
+};
+
+aiAnswerLibrary.en = {
+  admissions: { title: "Start by separating the study level from the application route.", summary: "Undergraduate, taught postgraduate, and research degree applications follow different routes and timelines. Confirm the programme, applicant category, and intake before applying through the university's official system.", bullets: [["Undergraduate", "Mainland Gaokao and international-qualification applicants normally follow different published routes and requirements."], ["Taught postgraduate", "Check degree background, GPA, language scores, references, personal statement, and whether the programme reviews applications in rounds."], ["Research degree", "Match your research direction with potential supervisors and prepare a proposal; some programmes encourage early supervisor contact."], ["After an offer", "Non-local students usually need time for the student visa, housing, insurance, and registration documents."]], followups: ["Which undergraduate routes does CUHK offer?", "What documents do Hong Kong master's programmes usually require?", "How long does a Hong Kong student visa take?"] },
+  housing: { title: "Verify the listing, contract, and actual condition before negotiating price.", summary: "Hong Kong rentals move quickly, but you should not make a large payment before viewing the flat, checking the owner or agent, and reading the agreement. Include commuting cost in the decision.", bullets: [["Verify the listing", "Check the agent licence, owner or authorisation documents, address, and permitted use rather than relying on social screenshots."], ["Count every cost", "Include deposit, advance rent, commission, utilities, internet, and possible stamp duty."], ["Keep evidence", "Photograph walls, appliances, water pressure, and locks before moving in, and document repairs and inventory."], ["Test the commute", "Check peak-hour travel and last services, especially for cross-harbour journeys."]], followups: ["How much deposit is common in Hong Kong?", "How do I verify an estate agent licence?", "Which clauses matter most in a shared flat agreement?"] },
+  courses: { title: "Lock required courses and hard rules before ranking electives.", summary: "The biggest course-planning risks are prerequisites, timetable clashes, credit limits, and semester availability. AI can organise options, but the final plan must be confirmed in the university system.", bullets: [["Add fixed courses first", "Enter required and already selected courses before asking AI to fill the remaining timetable."], ["Check hard rules", "Verify prerequisites, exclusions, year restrictions, credits, and graduation requirements for the current term."], ["Balance workload", "Consider exams, reading, group work, and commuting instead of counting contact hours alone."], ["Prepare alternatives", "Keep at least two alternatives for popular courses and note waitlist and add-drop deadlines."]], followups: ["How do I add required courses to the AI planner?", "How can I estimate course enrolment difficulty?", "Is a course without a final exam always lighter?"] },
+  careers: { title: "Internship preparation combines role fit, evidence, and immigration rules.", summary: "Use university career centres, official job platforms, and company sites, then tailor your CV to each role. Non-local students should also verify rules for internships, part-time work, and post-study employment.", bullets: [["Use trusted channels", "Start with your Career Centre, employer websites, Labour Department platforms, and credible alumni networks."], ["Show evidence", "Turn coursework, societies, research, or Vibe Coding prototypes into outcomes, responsibilities, and measurable impact."], ["Tailor each application", "Match your CV and cover letter to the skills and situations in the job description."], ["Check status rules", "Confirm student, internship, and IANG arrangements with your university and official Immigration Department guidance."]], followups: ["Should a Hong Kong internship CV be one or two pages?", "How can I build a portfolio without local work experience?", "What should I prepare before applying for IANG?"] },
+};
+
+const aiAnswerDetails = {
+  "zh-Hant": {
+    "admissions-undergrad": { title: "本科申請先按學歷資格找到正確入口。", summary: "高考、IB、A-Level 與其他國際資格通常使用不同通道。先確認申請身份、入學年份和課程要求，再以院校招生頁的最新安排為準。", bullets: [["確認通道", "核對你是高考生、國際資格、本地或非本地申請人。"], ["整理要求", "列出成績、語言、選科及補充材料，避免只看最低分。"], ["建立時間線", "記下申請、補件、面試、確認錄取與簽證節點。"]], followups: ["申請香港碩士通常要準備哪些材料？", "非本地生的學生簽證要多久？", "本科申請如何比較不同學校要求？"] },
+    "admissions-masters": { title: "碩士材料要同時證明學術能力與課程匹配。", summary: "不同課程對專業背景、GPA、語言與工作經驗要求不同。建議先做課程清單，再為每個項目準備對應版本。", bullets: [["基礎文件", "通常先整理成績單、學位證明、語言成績與身份文件。"], ["敘事材料", "個人陳述與履歷要回應課程方向，推薦信提供具體證據。"], ["分輪提交", "熱門項目可能分輪審核，提早準備並追蹤補件狀態。"]], followups: ["香港中文大學本科有哪些申請通道？", "研究型學位應該怎樣聯絡導師？", "非本地生的學生簽證要多久？"] },
+    "admissions-visa": { title: "學生簽證要在錄取後預留文件與審批時間。", summary: "非本地生一般需由院校協助或擔保辦理。實際時長會受文件完整度、院校流程及入境處審批影響，不宜用單一日期倒推。", bullets: [["先看院校指引", "確認錄取條件、擔保表格、財力與住宿等文件清單。"], ["一次交齊", "姓名、證件號碼和課程資料要一致，缺件會拖慢流程。"], ["保留緩衝", "未獲正式批准前不要把不可退款行程排得太緊。"]], followups: ["錄取後還要完成哪些註冊步驟？", "申請香港碩士通常要準備哪些材料？", "到港前要準備哪些文件？"] },
+    "housing-deposit": { title: "按金不是唯一前期成本，付款前先核對合約。", summary: "香港租務的付款組合會因放盤和合約而異。不要只問要付幾個月，還要把首期租金、佣金、印花與雜費一起計算。", bullets: [["拆開金額", "要求逐項列明按金、預付租金、佣金與其他費用。"], ["核對收款方", "確認業主或獲授權代理身份，索取正式收據。"], ["寫清退還", "把按金用途、扣款條件與退還時間寫進合約。"]], followups: ["怎樣核實地產代理牌照？", "合租時要把哪些條款寫進合約？", "入住前應該拍攝哪些證據？"] },
+    "housing-agent": { title: "先查牌照與公司資料，再相信代理提供的放盤。", summary: "代理名片、社交帳號和聊天記錄不能代替正式核驗。付款或簽署文件前，應在監管機構渠道核對持牌人與公司。", bullets: [["核對姓名牌照", "確認持牌人姓名、牌照狀態與所屬代理公司。"], ["核對物業授權", "要求說明代表業主或租客的身份及利益關係。"], ["避免私下轉帳", "收款資料、公司名稱與文件不一致時先停止交易。"]], followups: ["香港租房一般要付幾個月按金？", "合租時要把哪些條款寫進合約？", "遇到可疑租房放盤怎樣處理？"] },
+    "housing-contract": { title: "合租合約要把責任邊界寫得比口頭承諾更清楚。", summary: "除了租期與租金，還應明確室友變更、公共費用、維修、提前退租和按金分配，避免日後各自理解不同。", bullets: [["共同責任", "確認所有租客是否共同承擔全額租金及損壞責任。"], ["日常費用", "寫明水電網絡、清潔與公共用品如何分攤。"], ["退出機制", "約定換室友、提前退租、按金轉移與物品交接。"]], followups: ["香港租房一般要付幾個月按金？", "怎樣核實地產代理牌照？", "入住前應該拍攝哪些證據？"] },
+    "courses-fixed": { title: "先放入不能移動的課，再讓 AI 填補剩餘空檔。", summary: "必修課、已選課和固定活動應作為硬限制。系統會先避開衝堂，再按目標門數、最低學分與偏好推薦其餘課程。", bullets: [["輸入固定資料", "加入課名、星期、開始結束時間、學分與考核方式。"], ["先做衝突檢查", "同一天重疊時段不應進入推薦結果。"], ["補齊目標", "AI 只在剩餘空檔中補足門數和最低目標學分。"]], followups: ["選課時怎樣判斷搶課難度？", "沒有 Final Exam 的課一定比較輕鬆嗎？", "怎樣生成沒有星期五課的方案？"] },
+    "courses-demand": { title: "搶課難度應看名額、需求與替代性，不只看課名熱門。", summary: "MVP 的難度預測可綜合往期熱度、課程名額、必修需求和同時段替代課，但最終結果仍取決於校方當期安排。", bullets: [["看供需", "小班、必修需求高或跨院系熱門課通常更緊張。"], ["看限制", "年級、專業與先修限制會改變你實際可選的名額。"], ["備兩套方案", "為高難度課準備同學分、同能力方向的替代課。"]], followups: ["怎樣把必修課加入 AI 選課沙盤？", "沒有 Final Exam 的課一定比較輕鬆嗎？", "候補名單期間應該準備什麼？"] },
+    "courses-exam": { title: "沒有 Final Exam 不代表課程一定更輕鬆。", summary: "考核可能改成多次小測、報告、展示或密集小組項目。比較負擔時要看整個學期的評核分布與截止日期。", bullets: [["讀評核比例", "比較考試、論文、展示、出席和小組作業的權重。"], ["看截止分布", "多門課在同一週交項目，壓力可能高於一次期末考。"], ["配合強項", "按你的寫作、演講、協作與應試偏好組合課程。"]], followups: ["選課時怎樣判斷搶課難度？", "怎樣平衡小組作業和閱讀量？", "怎樣把必修課加入 AI 選課沙盤？"] },
+    "careers-cv": { title: "實習履歷長度要服從內容密度，不是越多越好。", summary: "多數學生可先以一頁呈現最相關經驗。只有研究、作品或經歷確實需要時才延伸，並確保第一頁已能說清匹配度。", bullets: [["對準職位", "保留與職位技能最相關的課程、項目與經驗。"], ["寫成果", "用行動、方法和結果描述貢獻，不只列職責。"], ["方便掃描", "統一日期、標題和動詞，讓招聘者快速抓到重點。"]], followups: ["沒有本地工作經驗怎樣做作品集？", "IANG 申請前要準備什麼？", "怎樣把課堂項目寫成履歷成果？"] },
+    "careers-portfolio": { title: "沒有本地工作經驗，也可以用可驗證項目建立作品集。", summary: "課堂專題、研究、社群服務與 Vibe Coding 原型都能成為案例，關鍵是清楚展示問題、你的角色、決策與結果。", bullets: [["選三個案例", "優先挑與目標職位最接近、能展示不同能力的作品。"], ["呈現過程", "保留需求、迭代、測試與反思，不只放最終畫面。"], ["提供證據", "加入連結、數據、用戶回饋或可操作示例。"]], followups: ["香港實習履歷應該寫一頁還是兩頁？", "IANG 申請前要準備什麼？", "Vibe Coding 項目怎樣寫進作品集？"] },
+    "careers-iang": { title: "IANG 準備要同時核對資格、文件與就業時間線。", summary: "申請條件和所需文件應以入境處最新頁面為準。畢業、簽證到期與入職日期之間要留有處理空間。", bullets: [["確認身份", "核對你是否屬於合資格的非本地畢業生及適用申請類別。"], ["整理文件", "預先準備旅行證件、畢業證明及官方要求的相關材料。"], ["安排時間", "把學校發證、申請處理和僱主入職安排放在同一時間線。"]], followups: ["香港實習履歷應該寫一頁還是兩頁？", "沒有本地工作經驗怎樣做作品集？", "學生簽證到期前要注意什麼？"] },
+  },
+};
+
+aiAnswerDetails["zh-Hans"] = {
+  "admissions-undergrad": { title: "本科申请先按学历资格找到正确入口。", summary: "高考、IB、A-Level 与其他国际资格通常使用不同通道。先确认申请身份、入学年份和课程要求，再以院校招生页的最新安排为准。", bullets: [["确认通道", "核对你是高考生、国际资格、本地或非本地申请人。"], ["整理要求", "列出成绩、语言、选科及补充材料，避免只看最低分。"], ["建立时间线", "记下申请、补件、面试、确认录取与签证节点。"]], followups: ["申请香港硕士通常要准备哪些材料？", "非本地生的学生签证要多久？", "本科申请如何比较不同学校要求？"] },
+  "admissions-masters": { title: "硕士材料要同时证明学术能力与课程匹配。", summary: "不同课程对专业背景、GPA、语言与工作经验要求不同。建议先做课程清单，再为每个项目准备对应版本。", bullets: [["基础文件", "通常先整理成绩单、学位证明、语言成绩与身份文件。"], ["叙事材料", "个人陈述与简历要回应课程方向，推荐信提供具体证据。"], ["分轮提交", "热门项目可能分轮审核，提早准备并追踪补件状态。"]], followups: ["香港中文大学本科有哪些申请通道？", "研究型学位应该怎样联系导师？", "非本地生的学生签证要多久？"] },
+  "admissions-visa": { title: "学生签证要在录取后预留文件与审批时间。", summary: "非本地生一般需由院校协助或担保办理。实际时长会受文件完整度、院校流程及入境处审批影响，不宜用单一日期倒推。", bullets: [["先看院校指引", "确认录取条件、担保表格、财力与住宿等文件清单。"], ["一次交齐", "姓名、证件号码和课程资料要一致，缺件会拖慢流程。"], ["保留缓冲", "未获正式批准前不要把不可退款行程排得太紧。"]], followups: ["录取后还要完成哪些注册步骤？", "申请香港硕士通常要准备哪些材料？", "到港前要准备哪些文件？"] },
+  "housing-deposit": { title: "押金不是唯一前期成本，付款前先核对合同。", summary: "香港租务的付款组合会因房源和合同而异。不要只问要付几个月，还要把首期租金、佣金、印花与杂费一起计算。", bullets: [["拆开金额", "要求逐项列明押金、预付租金、佣金与其他费用。"], ["核对收款方", "确认业主或获授权代理身份，索取正式收据。"], ["写清退还", "把押金用途、扣款条件与退还时间写进合同。"]], followups: ["怎样核实地产代理牌照？", "合租时要把哪些条款写进合同？", "入住前应该拍摄哪些证据？"] },
+  "housing-agent": { title: "先查牌照与公司资料，再相信代理提供的房源。", summary: "代理名片、社交账号和聊天记录不能代替正式核验。付款或签署文件前，应在监管机构渠道核对持牌人与公司。", bullets: [["核对姓名牌照", "确认持牌人姓名、牌照状态与所属代理公司。"], ["核对物业授权", "要求说明代表业主或租客的身份及利益关系。"], ["避免私下转账", "收款资料、公司名称与文件不一致时先停止交易。"]], followups: ["香港租房一般要付几个月押金？", "合租时要把哪些条款写进合同？", "遇到可疑租房房源怎样处理？"] },
+  "housing-contract": { title: "合租合同要把责任边界写得比口头承诺更清楚。", summary: "除了租期与租金，还应明确室友变更、公共费用、维修、提前退租和押金分配，避免日后各自理解不同。", bullets: [["共同责任", "确认所有租客是否共同承担全额租金及损坏责任。"], ["日常费用", "写明水电网络、清洁与公共用品如何分摊。"], ["退出机制", "约定换室友、提前退租、押金转移与物品交接。"]], followups: ["香港租房一般要付几个月押金？", "怎样核实地产代理牌照？", "入住前应该拍摄哪些证据？"] },
+  "courses-fixed": { title: "先放入不能移动的课，再让 AI 填补剩余空档。", summary: "必修课、已选课和固定活动应作为硬限制。系统会先避开冲突，再按目标门数、最低学分与偏好推荐其余课程。", bullets: [["输入固定资料", "加入课名、星期、开始结束时间、学分与考核方式。"], ["先做冲突检查", "同一天重叠时段不应进入推荐结果。"], ["补齐目标", "AI 只在剩余空档中补足门数和最低目标学分。"]], followups: ["选课时怎样判断抢课难度？", "没有 Final Exam 的课一定比较轻松吗？", "怎样生成没有星期五课的方案？"] },
+  "courses-demand": { title: "抢课难度应看名额、需求与替代性，不只看课程热门。", summary: "MVP 的难度预测可综合往期热度、课程名额、必修需求和同时段替代课，但最终结果仍取决于校方当期安排。", bullets: [["看供需", "小班、必修需求高或跨院系热门课通常更紧张。"], ["看限制", "年级、专业与先修限制会改变你实际可选的名额。"], ["备两套方案", "为高难度课准备同学分、同能力方向的替代课。"]], followups: ["怎样把必修课加入 AI 选课沙盘？", "没有 Final Exam 的课一定比较轻松吗？", "候补名单期间应该准备什么？"] },
+  "courses-exam": { title: "没有 Final Exam 不代表课程一定更轻松。", summary: "考核可能改成多次小测、报告、展示或密集小组项目。比较负担时要看整个学期的评核分布与截止日期。", bullets: [["读评核比例", "比较考试、论文、展示、出席和小组作业的权重。"], ["看截止分布", "多门课在同一周交项目，压力可能高于一次期末考。"], ["配合强项", "按你的写作、演讲、协作与应试偏好组合课程。"]], followups: ["选课时怎样判断抢课难度？", "怎样平衡小组作业和阅读量？", "怎样把必修课加入 AI 选课沙盘？"] },
+  "careers-cv": { title: "实习简历长度要服从内容密度，不是越多越好。", summary: "多数学生可先以一页呈现最相关经验。只有研究、作品或经历确实需要时才延伸，并确保第一页已能说清匹配度。", bullets: [["对准职位", "保留与职位技能最相关的课程、项目与经验。"], ["写成果", "用行动、方法和结果描述贡献，不只列职责。"], ["方便扫描", "统一日期、标题和动词，让招聘者快速抓到重点。"]], followups: ["没有本地工作经验怎样做作品集？", "IANG 申请前要准备什么？", "怎样把课堂项目写成简历成果？"] },
+  "careers-portfolio": { title: "没有本地工作经验，也可以用可验证项目建立作品集。", summary: "课堂项目、研究、社群服务与 Vibe Coding 原型都能成为案例，关键是清楚展示问题、你的角色、决策与结果。", bullets: [["选三个案例", "优先挑与目标职位最接近、能展示不同能力的作品。"], ["呈现过程", "保留需求、迭代、测试与反思，不只放最终画面。"], ["提供证据", "加入链接、数据、用户反馈或可操作示例。"]], followups: ["香港实习简历应该写一页还是两页？", "IANG 申请前要准备什么？", "Vibe Coding 项目怎样写进作品集？"] },
+  "careers-iang": { title: "IANG 准备要同时核对资格、文件与就业时间线。", summary: "申请条件和所需文件应以入境处最新页面为准。毕业、签证到期与入职日期之间要留有处理空间。", bullets: [["确认身份", "核对你是否属于合资格的非本地毕业生及适用申请类别。"], ["整理文件", "预先准备旅行证件、毕业证明及官方要求的相关材料。"], ["安排时间", "把学校发证、申请处理和雇主入职安排放在同一时间线。"]], followups: ["香港实习简历应该写一页还是两页？", "没有本地工作经验怎样做作品集？", "学生签证到期前要注意什么？"] },
+};
+
+aiAnswerDetails.en = {
+  "admissions-undergrad": { title: "Choose the undergraduate route that matches your qualification.", summary: "Gaokao, IB, A-Level, and other qualifications usually use different routes. Confirm applicant status, intake, and programme requirements on the official admissions page.", bullets: [["Identify the route", "Check whether you apply through Gaokao, international qualifications, or a local route."], ["Map requirements", "List grades, language, subject requirements, and supporting documents."], ["Build a timeline", "Track application, interview, offer, acceptance, and visa milestones."]], followups: ["What documents do Hong Kong master's programmes usually require?", "How long does a Hong Kong student visa take?", "How should I compare undergraduate requirements?"] },
+  "admissions-masters": { title: "A master's application must show both academic readiness and programme fit.", summary: "Requirements differ by programme. Build a shortlist first, then prepare tailored materials for each degree rather than sending one generic application.", bullets: [["Core documents", "Prepare transcripts, degree proof, language results, and identity documents."], ["Narrative materials", "Align your statement, CV, and references with the programme."], ["Review rounds", "Submit early when programmes review applications in rounds and monitor missing items."]], followups: ["Which undergraduate routes does CUHK offer?", "How should I contact a research supervisor?", "How long does a Hong Kong student visa take?"] },
+  "admissions-visa": { title: "Leave time for documents and processing after receiving an offer.", summary: "Non-local students generally apply with university sponsorship or assistance. Timing varies with document completeness, university handling, and Immigration Department review.", bullets: [["Follow university steps", "Check the offer conditions, sponsorship forms, finance, and accommodation documents."], ["Keep details consistent", "Names, passport numbers, and programme details must match across forms."], ["Keep a buffer", "Avoid tight non-refundable travel plans before formal approval."]], followups: ["What registration steps follow an offer?", "What documents do master's programmes require?", "Which documents should I carry to Hong Kong?"] },
+  "housing-deposit": { title: "A deposit is only one part of the upfront rental cost.", summary: "Payment structures vary. Add advance rent, commission, stamp-related charges, and utilities before deciding whether a flat fits your budget.", bullets: [["Separate each amount", "Ask for an itemised list of deposit, rent, commission, and fees."], ["Verify the payee", "Confirm the owner or authorised agent and request formal receipts."], ["Document refunds", "Put deductions, conditions, and return timing in the agreement."]], followups: ["How do I verify an estate agent licence?", "Which clauses matter in a shared flat agreement?", "What evidence should I photograph before moving in?"] },
+  "housing-agent": { title: "Verify the licence and company before trusting a listing.", summary: "A profile, name card, or chat history is not formal verification. Check the agent and company through the regulator before paying or signing.", bullets: [["Match identity", "Confirm the agent name, licence status, and company."], ["Check authority", "Ask who the agent represents and how the property was authorised."], ["Pause on mismatches", "Do not transfer money when payee, company, and documents conflict."]], followups: ["How much deposit is common in Hong Kong?", "Which clauses matter in a shared flat agreement?", "What should I do with a suspicious listing?"] },
+  "housing-contract": { title: "A shared-flat agreement should make responsibilities explicit.", summary: "Beyond rent and term, cover roommate changes, shared bills, repairs, early exit, and deposit allocation so verbal promises do not become disputes.", bullets: [["Joint responsibility", "Check whether each tenant can be liable for the full rent or damage."], ["Shared expenses", "Define utilities, internet, cleaning, and household costs."], ["Exit process", "Set rules for replacement tenants, early exit, deposits, and inventory."]], followups: ["How much deposit is common in Hong Kong?", "How do I verify an estate agent licence?", "What evidence should I photograph before moving in?"] },
+  "courses-fixed": { title: "Add immovable courses before AI fills the remaining gaps.", summary: "Required, selected, and fixed commitments should become hard constraints. AI can then avoid clashes and fill remaining course and minimum-credit targets.", bullets: [["Enter fixed data", "Add course, day, start and end time, credits, and assessment."], ["Check conflicts first", "Overlapping sessions must be excluded from recommendations."], ["Fill the target", "Only use remaining slots to reach the course and credit goals."]], followups: ["How can I estimate enrolment difficulty?", "Is a course without a final exam always lighter?", "How can I keep Friday free?"] },
+  "courses-demand": { title: "Enrolment difficulty depends on supply, demand, and alternatives.", summary: "The MVP can combine past interest, class size, required demand, and alternatives. The university's current allocation rules remain decisive.", bullets: [["Estimate demand", "Small classes and widely required or cross-faculty courses tend to fill faster."], ["Check restrictions", "Year, major, and prerequisite limits change your actual access."], ["Prepare two plans", "Keep alternatives with comparable credits and learning outcomes."]], followups: ["How do I add required courses to the planner?", "Is a course without a final exam always lighter?", "What should I do while waitlisted?"] },
+  "courses-exam": { title: "No final exam does not automatically mean a lighter course.", summary: "Assessment may shift to quizzes, reports, presentations, or intensive group work. Compare the full semester workload and deadline distribution.", bullets: [["Read the weighting", "Compare exams, essays, presentations, attendance, and group work."], ["Map deadlines", "Several project deadlines in one week can exceed one final exam."], ["Match strengths", "Balance writing, presenting, teamwork, and test-taking preferences."]], followups: ["How can I estimate enrolment difficulty?", "How can I balance group work and reading?", "How do I add required courses to the planner?"] },
+  "careers-cv": { title: "CV length should follow relevance, not volume.", summary: "Most students can start with one focused page. Extend only when research, projects, or experience genuinely need space, and keep the strongest evidence on page one.", bullets: [["Target the role", "Keep courses, projects, and experience that match the role."], ["Show outcomes", "Describe action, method, and result instead of duties alone."], ["Make it scannable", "Use consistent dates, headings, and action verbs."]], followups: ["How can I build a portfolio without local experience?", "What should I prepare before IANG?", "How do I turn coursework into CV achievements?"] },
+  "careers-portfolio": { title: "Verifiable projects can build a portfolio without local work experience.", summary: "Coursework, research, community work, and Vibe Coding prototypes can all become cases when they show the problem, your role, decisions, and outcomes.", bullets: [["Choose three cases", "Select work closest to the target role and show different strengths."], ["Show the process", "Include requirements, iterations, tests, and reflection."], ["Add evidence", "Link prototypes, data, user feedback, or live examples."]], followups: ["Should an internship CV be one or two pages?", "What should I prepare before IANG?", "How do I present a Vibe Coding project?"] },
+  "careers-iang": { title: "IANG preparation combines eligibility, documents, and an employment timeline.", summary: "Use the latest Immigration Department requirements. Leave space between graduation documents, visa expiry, processing, and the employer's start date.", bullets: [["Confirm eligibility", "Check your non-local graduate category and applicable route."], ["Prepare documents", "Gather travel documents, graduation proof, and official supporting materials."], ["Align timing", "Put university issuance, processing, and onboarding on one timeline."]], followups: ["Should an internship CV be one or two pages?", "How can I build a portfolio without local experience?", "What should I watch before my student visa expires?"] },
+};
+
+const plannerFacultyCatalog = {
+  arts: {
+    label: "文學與人文學院",
+    majors: ["中文", "英文", "翻譯", "歷史", "哲學", "文化研究"],
+    requirements: ["語言及人文基礎", "專業核心與高階選修", "畢業論文、專題或整合課程"],
+  },
+  business: {
+    label: "商學院",
+    majors: ["工商管理", "會計", "金融", "市場學", "商業分析", "經濟學"],
+    requirements: ["會計、經濟與統計基礎", "專業核心及先修課鏈", "商業案例、實習或畢業專題"],
+  },
+  computing: {
+    label: "計算機、數據與工程學院",
+    majors: ["計算機科學", "人工智能", "數據科學", "電子工程", "資訊系統", "金融科技"],
+    requirements: ["數學、統計與編程基礎", "專業核心及實驗課", "Capstone、專題或工程實習"],
+  },
+  science: {
+    label: "理學院",
+    majors: ["生物科學", "化學", "數學", "物理", "環境科學", "統計學"],
+    requirements: ["學科基礎與實驗課", "專業核心及高階選修", "研究訓練或畢業專題"],
+  },
+  social: {
+    label: "社會科學與公共政策學院",
+    majors: ["社會科學", "公共政策", "心理學", "社會學", "政治學", "國際關係"],
+    requirements: ["社會研究方法與統計", "專業理論及香港／亞洲議題", "研究專題、實習或服務學習"],
+  },
+  creative: {
+    label: "傳理、設計與創意學院",
+    majors: ["傳播學", "新聞學", "媒體與設計", "電影", "視覺藝術", "創意媒體"],
+    requirements: ["媒體、設計與文化基礎", "工作室及專業選修", "作品集或畢業創作"],
+  },
+  education: {
+    label: "教育學院",
+    majors: ["教育學", "幼兒教育", "英語教育", "中文教育", "特殊教育", "健康教育"],
+    requirements: ["教育基礎與教學法", "主修學科及專業培訓", "學校體驗、實習或畢業專題"],
+  },
+  health: {
+    label: "健康與生命科學學院",
+    majors: ["護理學", "公共衞生", "生物醫學", "康復科學", "食品科學", "運動科學"],
+    requirements: ["生命科學與專業基礎", "實驗、臨床或實務訓練", "專業實習及畢業要求"],
+  },
+};
+
 const plannerSchools = {
-  hku: { name: "香港大學 HKU", system: "HKU SIS", prefix: "CAES", credits: 6 },
-  cuhk: { name: "香港中文大學 CUHK", system: "CUHK CUSIS", prefix: "UGFN", credits: 3 },
-  hkust: { name: "香港科技大學 HKUST", system: "HKUST SIS", prefix: "CORE", credits: 3 },
-  cityu: { name: "香港城市大學 CityU", system: "CityU AIMS", prefix: "GE", credits: 3 },
-  polyu: { name: "香港理工大學 PolyU", system: "PolyU eStudent", prefix: "APSS", credits: 3 },
-  hkbu: { name: "香港浸會大學 HKBU", system: "HKBU BUniPort", prefix: "GCLA", credits: 3 },
-  eduhk: { name: "香港教育大學 EdUHK", system: "EdUHK The Portal", prefix: "GEH", credits: 3 },
-  lu: { name: "嶺南大學 LU", system: "Lingnan DegreeWorks", prefix: "CCC", credits: 3 },
+  hku: {
+    name: "香港大學 HKU", system: "HKU SIS", prefix: "CAES", credits: 6,
+    faculties: ["arts", "business", "computing", "science", "social", "education", "health"],
+    degree: { total: 240, common: 54, programme: 96, elective: 90 },
+    seniorDegree: { total: 120, common: 12, programme: 72, elective: 36 },
+    transferDegree: { total: 180, common: 42, programme: 96, elective: 42 },
+    pg: { taught: 60, research: 12, phd: 18 },
+    commonExamples: ["Common Core 課程", "學術英語／中文", "AI Literacy"],
+    source: "https://aas.hku.hk/ug-cur/",
+    seniorSource: "https://commoncore.hku.hk/advstgcrt/",
+    pgSource: "https://gradsch.hku.hk/",
+  },
+  cuhk: {
+    name: "香港中文大學 CUHK", system: "CUHK CUSIS", prefix: "UGFN", credits: 3,
+    faculties: ["arts", "business", "computing", "science", "social", "education", "health"],
+    degree: { total: 123, common: 39, programme: 60, elective: 24 },
+    seniorDegree: { total: 60, common: 9, programme: 51, elective: 0 },
+    transferDegree: { total: 99, common: 30, programme: 60, elective: 9 },
+    pg: { taught: 24, research: 12, phd: 12 },
+    commonExamples: ["大學通識教育", "中文／英文語文", "數字素養及體育"],
+    source: "https://admission.cuhk.edu.hk/why-cuhk/undergraduate-curriculum/",
+    seniorSource: "https://www.res.cuhk.edu.hk/cusis/transfer-credit-exemption/info-on-course-and-unit-exemptions-for-undergraduate-students/",
+    pgSource: "https://www.gs.cuhk.edu.hk/",
+  },
+  hkust: {
+    name: "香港科技大學 HKUST", system: "HKUST SIS", prefix: "CORE", credits: 3,
+    faculties: ["computing", "science", "business", "social"],
+    degree: { total: 120, common: 36, programme: 66, elective: 18 },
+    seniorDegree: { total: 60, common: 15, programme: 45, elective: 0 },
+    transferDegree: { total: 90, common: 27, programme: 54, elective: 9 },
+    pg: { taught: 30, research: 12, phd: 15 },
+    commonExamples: ["Common Core", "English Communication", "Healthy Lifestyle"],
+    source: "https://prog-crs.hkust.edu.hk/ugprog",
+    seniorSource: "https://join.hkust.edu.hk/admissions/post-secondary",
+    pgSource: "https://prog-crs.hkust.edu.hk/pgprog",
+  },
+  cityu: {
+    name: "香港城市大學 CityU", system: "CityU AIMS", prefix: "GE", credits: 3,
+    faculties: ["business", "computing", "science", "social", "creative", "health"],
+    degree: { total: 120, common: 30, programme: 72, elective: 18 },
+    seniorDegree: { total: 60, common: 12, programme: 45, elective: 3 },
+    transferDegree: { total: 91, common: 22, programme: 57, elective: 12 },
+    pg: { taught: 30, research: 7, phd: 14 },
+    commonExamples: ["Gateway Education", "大學英語／中文文化", "Whole Person Development"],
+    source: "https://www.cityu.edu.hk/catalogue/ug/current/",
+    seniorSource: "https://www.cityu.edu.hk/admo/admissions/non-jupas-senior-year-admission",
+    pgSource: "https://www.cityu.edu.hk/pg/",
+  },
+  polyu: {
+    name: "香港理工大學 PolyU", system: "PolyU eStudent", prefix: "APSS", credits: 3,
+    faculties: ["business", "computing", "science", "social", "creative", "health"],
+    degree: { total: 120, common: 30, programme: 72, elective: 18 },
+    seniorDegree: { total: 60, common: 9, programme: 51, elective: 0 },
+    transferDegree: { total: 90, common: 21, programme: 60, elective: 9 },
+    pg: { taught: 30, research: 9, phd: 15 },
+    commonExamples: ["Language and Communication", "Cluster Area Requirements", "Service Learning／WIE"],
+    source: "https://www.polyu.edu.hk/ar/students-in-taught-programmes/student-handbook/",
+    seniorSource: "https://www.polyu.edu.hk/cus/student/senior-year-intakes-and-articulation-degree-programme/curriculum-framework/",
+    pgSource: "https://www.polyu.edu.hk/study/pg/",
+  },
+  hkbu: {
+    name: "香港浸會大學 HKBU", system: "HKBU BUniPort", prefix: "GCLA", credits: 3,
+    faculties: ["arts", "business", "computing", "science", "social", "creative", "health"],
+    degree: { total: 128, common: 38, programme: 72, elective: 18 },
+    seniorDegree: { total: 64, common: 12, programme: 48, elective: 4 },
+    transferDegree: { total: 96, common: 29, programme: 58, elective: 9 },
+    pg: { taught: 30, research: 12, phd: 15 },
+    commonExamples: ["University English／Chinese", "General Education", "GE Capstone"],
+    source: "https://ar.hkbu.edu.hk/student-services/academic-registry-services/academic-calendar-and-catalogue",
+    seniorSource: "https://admissions.hkbu.edu.hk/faq.html?tabs1=tab-2-tab&tabs2=tab-2-1-tab&tabs3=tab-2-4-tab",
+    pgSource: "https://gs.hkbu.edu.hk/",
+  },
+  eduhk: {
+    name: "香港教育大學 EdUHK", system: "EdUHK The Portal", prefix: "GEH", credits: 3,
+    faculties: ["education", "arts", "social", "science", "creative"],
+    degree: { total: 120, common: 30, programme: 72, elective: 18 },
+    seniorDegree: { total: 60, common: 6, programme: 39, elective: 15 },
+    transferDegree: { total: 90, common: 21, programme: 60, elective: 9 },
+    pg: { taught: 30, research: 12, phd: 15 },
+    commonExamples: ["General Education", "Language Enhancement", "Experiential Learning"],
+    source: "https://www.eduhk.hk/acadprog/",
+    seniorSource: "https://www.apply.eduhk.hk/ug/faq_senioryear",
+    pgSource: "https://www.eduhk.hk/gradsch/",
+  },
+  lu: {
+    name: "嶺南大學 LU", system: "Lingnan DegreeWorks", prefix: "CCC", credits: 3,
+    faculties: ["arts", "business", "social", "computing"],
+    degree: { total: 120, common: 33, programme: 69, elective: 18 },
+    seniorDegree: { total: 60, common: 12, programme: 42, elective: 6 },
+    transferDegree: { total: 90, common: 24, programme: 57, elective: 9 },
+    pg: { taught: 30, research: 12, phd: 15 },
+    commonExamples: ["Core Curriculum", "中文／英文語文", "Data and Digital Literacy"],
+    source: "https://www.ln.edu.hk/admissions/ug",
+    seniorSource: "https://www.ln.edu.hk/admissions/ug",
+    pgSource: "https://www.ln.edu.hk/reg/academic-programmes/postgraduate-programmes",
+  },
 };
 
 const plannerTracks = {
@@ -769,6 +1053,43 @@ const finalExamCourses = new Set([
 
 let plannerVariation = 0;
 let fixedCourses = [];
+let activeDegreeCreditKey = "";
+let degreeLongPressTimer = null;
+
+const plannerEntryRoutes = {
+  standard: {
+    label: "四年制本科",
+    help: "按完整四年制學位要求規劃。",
+  },
+  associate: {
+    label: "副學士銜接學士",
+    help: "通常由 Year 3 開始、約兩年完成；實際獲批學分及剩餘要求由院系審核。",
+  },
+  higherDiploma: {
+    label: "高級文憑銜接學士",
+    help: "通常採用高年級入學或銜接課程；部分通識獲縮減，但專業核心仍須完成。",
+  },
+  transfer: {
+    label: "轉學／學分轉移",
+    help: "先按學校轉學規則的保守基線規劃，收到正式轉移學分結果後再扣減。",
+  },
+};
+
+const plannerStudyLevels = {
+  pgTaught: { label: "授課型碩士", shortLabel: "授課型研究生" },
+  pgResearch: { label: "研究型碩士 MPhil", shortLabel: "研究型研究生" },
+  phd: { label: "博士 PhD", shortLabel: "博士研究生" },
+};
+
+function isPostgraduateLevel(year) {
+  return Boolean(plannerStudyLevels[year]);
+}
+
+function studyPathLabel(state) {
+  return isPostgraduateLevel(state.year)
+    ? plannerStudyLevels[state.year].label
+    : plannerEntryRoutes[state.entryRoute].label;
+}
 
 function timeToMinutes(value) {
   const [hours, minutes] = String(value).split(":").map(Number);
@@ -819,10 +1140,266 @@ function populateTargetCreditOptions() {
   creditSelect.value = String(Math.min(36, Math.max(1, currentValue)));
 }
 
+function populatePlannerMajorOptions() {
+  const facultyKey = document.querySelector("#plannerFaculty").value;
+  const faculty = plannerFacultyCatalog[facultyKey];
+  const majorOptions = document.querySelector("#plannerMajorOptions");
+  majorOptions.innerHTML = (faculty?.majors || [])
+    .map((major) => `<option value="${escapeHTML(major)}"></option>`)
+    .join("");
+}
+
+function populatePlannerFacultyOptions() {
+  const school = plannerSchools[document.querySelector("#plannerSchool").value];
+  const facultySelect = document.querySelector("#plannerFaculty");
+  const previousValue = facultySelect.value;
+  facultySelect.innerHTML = school.faculties
+    .map((facultyKey) => `<option value="${facultyKey}">${escapeHTML(plannerFacultyCatalog[facultyKey].label)}</option>`)
+    .join("");
+  facultySelect.value = school.faculties.includes(previousValue)
+    ? previousValue
+    : school.faculties.includes("social") ? "social" : school.faculties[0];
+  populatePlannerMajorOptions();
+}
+
+function degreeProfileForState(state, school) {
+  if (state.year === "pgTaught") {
+    const capstone = school.pg.taught >= 50 ? 6 : 3;
+    const elective = school.pg.taught >= 50 ? 18 : school.pg.taught >= 30 ? 9 : 6;
+    return {
+      mode: "postgraduate",
+      values: { total: school.pg.taught, common: school.pg.taught - elective - capstone, programme: elective, elective: capstone },
+      labels: { total: "課程總學分基線", common: "核心及必修課", programme: "認可選修課", elective: "Capstone／項目" },
+      note: "授課型碩士按該校常見課程規模建立規劃基線；不同專業可能使用不同學分制，須以課程手冊為準。",
+    };
+  }
+
+  if (state.year === "pgResearch" || state.year === "phd") {
+    const total = state.year === "phd" ? school.pg.phd : school.pg.research;
+    const methods = Math.min(total, state.year === "phd" ? 3 : 2);
+    return {
+      mode: "research",
+      values: { total, common: methods, programme: Math.max(0, total - methods), elective: "必修" },
+      labels: { total: "最低課程學分", common: "研究方法與倫理", programme: "學科／研究訓練", elective: "論文及口試" },
+      note: `${plannerStudyLevels[state.year].label}同時包含課程、研究進度審查及論文要求；個別院系可訂立更高學分門檻。`,
+    };
+  }
+
+  if (state.entryRoute === "associate" || state.entryRoute === "higherDiploma") {
+    return {
+      mode: "senior",
+      values: school.seniorDegree,
+      labels: { total: "最低剩餘修讀學分", common: "剩餘共同核心／通識", programme: "院系及專業課", elective: "可用選修學分" },
+      note: `${school.name}高年級入學以 ${school.seniorDegree.total} 學分作兩年規劃基線；錄取信、學分轉移表及院系課程表優先於本示例。`,
+    };
+  }
+
+  if (state.entryRoute === "transfer") {
+    return {
+      mode: "transfer",
+      values: school.transferDegree,
+      labels: { total: "轉學後規劃學分", common: "共同核心／通識", programme: "院系及專業課", elective: "可用選修學分" },
+      note: `${school.name}轉學生先按 ${school.transferDegree.total} 學分的保守基線排課；收到正式轉移學分結果後，數字會再按已獲豁免課程扣減。`,
+    };
+  }
+
+  return {
+    mode: "undergraduate",
+    values: school.degree,
+    labels: { total: "畢業總學分", common: "共同核心／通識", programme: "院系及專業範圍", elective: "選修規劃空間" },
+    note: "院系、雙主修、交換及不同入學學年可改變分配；生成課表前請按官方手冊核對。",
+  };
+}
+
+function degreeCreditExplanations(state, profile) {
+  const route = plannerEntryRoutes[state.entryRoute];
+  const school = plannerSchools[state.schoolKey];
+  const faculty = plannerFacultyCatalog[state.facultyKey] || plannerFacultyCatalog[school.faculties[0]];
+  const postgraduate = isPostgraduateLevel(state.year);
+  const seniorEntry = profile.mode === "senior" || profile.mode === "transfer";
+  const commonExamples = school.commonExamples.join("、");
+  const programmeExamples = faculty.requirements.join("、");
+
+  if (profile.mode === "research") {
+    return {
+      total: {
+        title: profile.labels.total,
+        description: `${profile.values.total} 是本校研究學位的課程學分規劃基線，論文研究通常另行註冊，不等同把論文換算進這個數字。`,
+        checks: ["院系指定的核心研究課", "每學期研究進度及最低 GPA", "全日制／兼讀制修讀期限"],
+      },
+      common: {
+        title: profile.labels.common,
+        description: "這一框放研究設計、量化或質性方法、研究倫理與學術誠信等跨研究題目的訓練。",
+        checks: ["Research Methods／Advanced Methods", "Research Ethics／Responsible Conduct of Research", "資料管理、私隱或實驗安全訓練"],
+      },
+      programme: {
+        title: profile.labels.programme,
+        description: `這一框放與論文領域直接相關的高階課，例如${programmeExamples}，以及院系指定的研討課。`,
+        checks: ["導師及研究生課程主任批准的科目", "高階專題、研究研討會或閱讀課", "博士生的核心課及跨院研究訓練"],
+      },
+      elective: {
+        title: profile.labels.elective,
+        description: "這不是普通選修學分框，而是研究學位的必修里程碑，包括論文、口試與階段審查。",
+        checks: ["MPhil／PhD Thesis 註冊與提交", "研究計劃或確認資格審查", state.year === "phd" ? "博士資格考試及最終口試" : "論文口試及修訂完成"],
+      },
+    };
+  }
+
+  if (profile.mode === "postgraduate") {
+    return {
+      total: {
+        title: profile.labels.total,
+        description: `${profile.values.total} 是目前用於排課的授課型碩士總學分基線，須完成所有必修、選修及項目類別。`,
+        checks: ["課程手冊列出的畢業總學分", "最低 GPA 及最長修讀期限", "不可重複計算或用本科課替代的科目"],
+      },
+      common: {
+        title: profile.labels.common,
+        description: `這一框放課程規定每位學生都要修的科目，例如${programmeExamples}。`,
+        checks: ["Programme Core／Required Courses", "研究方法、統計或專業實務", "指定修讀學期及先修條件"],
+      },
+      programme: {
+        title: profile.labels.programme,
+        description: "這一框放課程清單內可選的專業科目，用來建立專修方向或補足技能。",
+        checks: ["只計入課程認可的選修清單", "跨院選修是否需要批准", "部分熱門課設有名額或背景限制"],
+      },
+      elective: {
+        title: profile.labels.elective,
+        description: "這一框放畢業項目、實務專題、顧問項目或論文選項，是否必修取決於專業。",
+        checks: ["Capstone Project／Dissertation", "實習或行業項目能否計分", "提交、展示與口試時限"],
+      },
+    };
+  }
+
+  return {
+    total: {
+      title: profile.labels.total,
+      description: seniorEntry
+        ? `${profile.values.total} 是目前用於規劃的剩餘修讀範圍，不代表副學士或高級文憑的所有舊學分會自動獲批。`
+        : `${profile.values.total} 是完成學位的整體門檻，單純累積到這個數字仍不等於符合畢業資格。`,
+      checks: ["同時完成所有分類要求及指定必修", "符合最低 GPA、修讀年限及駐校學分要求", seniorEntry ? "確認院系正式批出的入學／轉移學分" : "留意重修、重複計算及不計入畢業的課程"],
+    },
+    common: {
+      title: profile.labels.common,
+      description: `這一框放全校學生都要完成的課，例如${commonExamples}；不是你主修名稱相近的課就一定能計入。`,
+      checks: ["在學校系統中標為 Common Core／GE／Language 的課", "每個範疇須修多少門及最遲完成年級", seniorEntry ? "查看哪些共同要求已由銜接或轉移學分豁免" : "確認不可重複計算、先修或非學分要求"],
+    },
+    programme: {
+      title: profile.labels.programme,
+      description: `這一框放院系及主修課，具體包括${programmeExamples}。只有課程手冊列入 Major Core、Required Major 或 Major Elective 的科目才計入。`,
+      checks: ["先修課是否已完成，避免延後整條課程鏈", "核心、指定選修及高階課各自的最低學分", "Capstone、實習、專業認證或畢業論文要求"],
+    },
+    elective: {
+      title: profile.labels.elective,
+      description: "這一框放不必計入主修的認可學分，例如跨院選修、副修科目、交換課或獲批准的實習課；它不是任意課都能填滿的空位。",
+      checks: ["課程是否標為 Free Elective／University Elective", "副修、第二主修或交換課會佔用多少空間", "部分課程可能受院系、年級、名額或先修限制"],
+    },
+    route: {
+      title: route.label,
+      description: route.help,
+      checks: ["入學通知書列明的修讀年級", "院系批出的學分轉移／豁免清單", "該入學學年適用的課程手冊版本"],
+    },
+  };
+}
+
+function showDegreeCreditDetail(key) {
+  const state = plannerState();
+  const school = plannerSchools[state.schoolKey];
+  const profile = degreeProfileForState(state, school);
+  const copy = degreeCreditExplanations(state, profile)[key];
+  const detail = document.querySelector("#degreeCreditDetail");
+  if (!copy || !detail) return;
+  activeDegreeCreditKey = key;
+  document.querySelectorAll(".degree-credit-item").forEach((item) => {
+    const isActive = item.dataset.creditKey === key;
+    item.classList.toggle("active", isActive);
+    item.setAttribute("aria-expanded", String(isActive));
+  });
+  detail.hidden = false;
+  detail.innerHTML = `
+    <div class="degree-detail-head"><span class="degree-info-mark">i</span><strong>${escapeHTML(copy.title)}</strong><small>點選或長按查看</small></div>
+    <p>${escapeHTML(copy.description)}</p>
+    <ul>${copy.checks.map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul>
+  `;
+}
+
+function syncEntryRouteUI(adjustYear = false) {
+  const year = document.querySelector("#plannerYear").value;
+  const entryRouteField = document.querySelector("#plannerEntryRouteField");
+  const postgraduate = isPostgraduateLevel(year);
+  entryRouteField.hidden = postgraduate;
+  if (postgraduate) return;
+
+  const routeKey = document.querySelector("#plannerEntryRoute").value;
+  const route = plannerEntryRoutes[routeKey];
+  const school = plannerSchools[document.querySelector("#plannerSchool").value];
+  const concreteHelp = routeKey === "associate" || routeKey === "higherDiploma"
+    ? `${route.help} ${school.name}目前以 ${school.seniorDegree.total} 學分作規劃基線。`
+    : routeKey === "transfer"
+      ? `${route.help} ${school.name}目前以 ${school.transferDegree.total} 學分作保守規劃基線。`
+      : route.help;
+  document.querySelector("#entryRouteHelp").textContent = concreteHelp;
+  if (adjustYear && (routeKey === "associate" || routeKey === "higherDiploma")) {
+    document.querySelector("#plannerYear").value = "3";
+  }
+}
+
+function renderDegreeRequirements(state = plannerState()) {
+  const school = plannerSchools[state.schoolKey];
+  const faculty = plannerFacultyCatalog[state.facultyKey] || plannerFacultyCatalog[school.faculties[0]];
+  const profile = degreeProfileForState(state, school);
+  const majorName = state.major || "尚未填寫專業";
+  const postgraduate = isPostgraduateLevel(state.year);
+  const seniorEntry = state.entryRoute === "associate" || state.entryRoute === "higherDiploma";
+  const requiredItems = state.year === "pgTaught"
+    ? ["課程核心及指定必修", "認可專業選修", "Capstone、實務項目或論文（按課程）"]
+    : state.year === "pgResearch"
+      ? ["研究方法與研究倫理", "導師批准的學科課及研討課", "MPhil 論文、進度審查及口試"]
+      : state.year === "phd"
+        ? ["博士核心及研究訓練", "資格／確認考試及年度進度審查", "原創博士論文及最終口試"]
+    : seniorEntry
+      ? ["院系批出的轉移／入學學分", "縮減後仍須完成的全校要求", ...faculty.requirements]
+      : ["大學共同核心、通識及語言要求", ...faculty.requirements];
+  const creditKeys = ["total", "common", "programme", "elective"];
+
+  document.querySelector("#degreeRequirementSummary").innerHTML = `
+    <div class="degree-summary-head">
+      <div>
+        <span class="degree-kicker">AI 學分要求識別</span>
+        <strong>${escapeHTML(school.name)} · ${escapeHTML(state.cohort)} 入學</strong>
+        <small>${escapeHTML(faculty.label)} · ${escapeHTML(majorName)} · ${escapeHTML(studyPathLabel(state))}</small>
+      </div>
+      <span class="degree-reference-badge">MVP 規劃參考</span>
+    </div>
+    <div class="degree-credit-grid">
+      ${creditKeys.map((key) => `
+        <button class="degree-credit-item" type="button" data-credit-key="${key}" aria-expanded="false" aria-controls="degreeCreditDetail" title="點選或長按查看${escapeHTML(profile.labels[key])}的具體要求">
+          <span class="degree-info-icon" aria-hidden="true">i</span>
+          <strong>${escapeHTML(String(profile.values[key]))}</strong>
+          <span>${escapeHTML(profile.labels[key])}</span>
+        </button>
+      `).join("")}
+    </div>
+    <div class="degree-credit-detail" id="degreeCreditDetail" hidden></div>
+    <div class="degree-required-block">
+      <strong>AI 找到的必修類別</strong>
+      <ul>${requiredItems.map((item) => `<li>${escapeHTML(item)}</li>`).join("")}</ul>
+    </div>
+    <div class="degree-source-row">
+      <p>${escapeHTML(profile.note)}</p>
+      <a href="${postgraduate ? school.pgSource : seniorEntry || state.entryRoute === "transfer" ? school.seniorSource : school.source}" target="_blank" rel="noopener noreferrer" title="前往 ${escapeHTML(school.name)} 官方網站">${postgraduate ? "前往學校官方研究生課程頁" : "前往學校官方本科課程頁"} ↗</a>
+    </div>
+  `;
+  if (activeDegreeCreditKey) showDegreeCreditDetail(activeDegreeCreditKey);
+}
+
 function plannerState() {
   return {
     schoolKey: document.querySelector("#plannerSchool").value,
+    facultyKey: document.querySelector("#plannerFaculty").value,
+    cohort: document.querySelector("#plannerCohort").value,
+    entryRoute: document.querySelector("#plannerEntryRoute").value,
     year: document.querySelector("#plannerYear").value,
+    major: document.querySelector("#plannerMajor").value.trim(),
     trackKey: document.querySelector("#plannerTrack").value,
     goal: document.querySelector('input[name="plannerGoal"]:checked')?.value || "career",
     targetCourses: Number(document.querySelector("#targetCourses").value),
@@ -840,7 +1417,7 @@ function plannerState() {
 }
 
 function courseCode(school, year, index) {
-  const level = year === "pg" ? 5 : Math.min(4, Number(year) + 1);
+  const level = isPostgraduateLevel(year) ? 5 : Math.min(4, Number(year) + 1);
   return `${school.prefix}${level}${index + 1}0`;
 }
 
@@ -981,7 +1558,9 @@ function renderTimetableImage(courses, school, state) {
 function renderPlannerPlan() {
   const state = plannerState();
   const school = plannerSchools[state.schoolKey];
+  const faculty = plannerFacultyCatalog[state.facultyKey];
   const track = plannerTracks[state.trackKey];
+  renderDegreeRequirements(state);
   const goalLabels = { safe: "穩妥畢業", career: "求職導向", explore: "興趣探索" };
   const fixedCredits = fixedCourses.reduce((sum, course) => sum + course.credits, 0);
   const fixedFinalExamCount = fixedCourses.filter((course) => course.finalExam).length;
@@ -1040,10 +1619,10 @@ function renderPlannerPlan() {
   const totalCredits = selected.reduce((sum, course) => sum + course.credits, 0);
 
   document.querySelector("#plannerSystemLabel").textContent = `模擬 ${school.system} · 示例資料`;
-  document.querySelector("#plannerResultTitle").textContent = `${goalLabels[state.goal]} · ${track.label}`;
+  document.querySelector("#plannerResultTitle").textContent = `${goalLabels[state.goal]} · ${state.major || track.label}`;
   document.querySelector("#plannerResultSummary").textContent = fixedCourses.length
-    ? `已保留 ${fixedCourses.length} 門必修／已選課，AI 再從 ${school.name} 的示例課程中補齊剩餘方案。`
-    : `AI 從 ${school.name} 的示例課程中，按你的年級、目標與時間偏好組合出這套方案。`;
+    ? `已保留 ${fixedCourses.length} 門必修／已選課，AI 再按 ${school.name}、${faculty.label}、${studyPathLabel(state)}及 ${state.cohort} 入學要求補齊方案。`
+    : `AI 按 ${school.name}、${faculty.label}、${state.major || "未指定專業"}、${studyPathLabel(state)}及 ${state.cohort} 入學要求，結合你的目標與時間偏好組合方案。`;
   document.querySelector("#matchScore").textContent = `${match}%`;
   document.querySelector("#heroMatchScore").textContent = match;
   document.querySelector("#coverageScore").textContent = `${coverage}%`;
@@ -1174,6 +1753,10 @@ const storeProgress = document.querySelector("#storeProgress");
 const storeRegister = document.querySelector("#storeRegister");
 const globalSearch = document.querySelector("#globalSearch");
 const clearSearch = document.querySelector("#clearSearch");
+const aiAnswerInput = document.querySelector("#aiAnswerInput");
+const aiAnswerOutput = document.querySelector("#aiAnswerOutput");
+const LIVE_SEARCH_ORIGIN = "https://liumer-mvp.xiejisheng2005.chatgpt.site";
+let aiSearchRequestId = 0;
 
 const languageNames = {
   "zh-Hant": "繁體中文",
@@ -1189,6 +1772,7 @@ const interfaceCopy = {
     clearSearchAria: "清除搜尋",
     nav: {
       home: "社區問答",
+      aiAnswer: "小留智答",
       aiPlanner: "選課沙盤",
       events: "在地活動",
       store: "L-Store",
@@ -1203,6 +1787,7 @@ const interfaceCopy = {
     topEyebrow: "校園郵箱認證社群 · 留學生專屬",
     topTitle: "今天想在香港收穫什麼新體驗？",
     registerCta: "註冊 / 校園認證",
+    aiAnswerCta: "小留智答",
     plannerCta: "AI 選課",
     askCta: "發問",
     heroTitle: "我是小留",
@@ -1217,6 +1802,7 @@ const interfaceCopy = {
     commonTitle: "留學生常用入口",
     commonHint: "校園生活工具箱",
     commonEntries: [
+      ["小留智答", "AI 整理答案、官方來源與延伸追問"],
       ["AI 選課沙盤", "先模擬課表，再進學校系統選課"],
       ["校園郵箱認證", "用學校郵箱加入學生社群"],
       ["高校圈", "查看港大、中大、科大等院校帖"],
@@ -1235,6 +1821,35 @@ const interfaceCopy = {
       { level: "Lv.4 小留夥伴", standard: "1000-1799 積分", benefits: "活動優先報名、CV 診斷與二手置頂福利" },
       { level: "Lv.5 社群嚮導", standard: "1800+ 積分", benefits: "可申請帶隊活動、參與內測與社群共創" },
     ],
+    aiAsk: {
+      eyebrow: "Liumer AI · 留學資訊整理",
+      heading: "問小留，先看重點，再核對官方來源。",
+      intro: "把分散的申請、選課、租房與生活資訊整理成可追問的答案；重要日期與資格仍以官方網站為準。",
+      label: "你想了解什麼？",
+      placeholder: "例如：香港中文大學怎樣申請？",
+      submit: "整理答案",
+      defaultQuery: "香港中文大學怎樣申請？",
+      chips: [["大學申請", "香港中文大學怎樣申請？"], ["租房避坑", "香港留學生租房要注意什麼？"], ["選課安排", "香港大學選課怎樣避免衝堂？"], ["實習準備", "留學生在香港怎樣找實習？"]],
+      answerLabel: "小留 AI 整理",
+      demoNote: "MVP 示例知識庫",
+      keyTips: "重點整理",
+      sourcesTitle: "參考來源",
+      sourcesHint: "優先列出大學及政府官方頁面",
+      followupsTitle: "你可能還想問",
+      followupsHint: "點一下可繼續追問",
+      askMore: "接著問點什麼…",
+      sourceLink: "查看來源",
+      feedbackHelpful: "有幫助",
+      feedbackUnhelpful: "需改善",
+      disclaimer: "AI 可能遺漏或誤解資訊。申請資格、截止日期與費用請以院校官方網站最新公布為準。",
+      searching: "正在搜尋最新網頁…",
+      liveLabel: "即時網絡整理",
+      offlineLabel: "網絡暫不可用 · 已顯示內建答案",
+      liveTitle: "已從最新網頁結果整理這個問題。",
+      liveSummary: "以下重點來自本次網絡搜尋的頁面摘要，請打開來源核對完整內容、日期與適用身份。",
+      liveSourceHint: "即時搜尋結果 · 官方網站優先排列",
+      searchedAt: "搜尋時間",
+    },
     searchEyebrow: "全站搜尋",
     searchEmptyTitle: "輸入關鍵字開始搜尋",
     searchSummary: "可搜尋社區帖子、評論、在地活動與 L-Store 福利。",
@@ -1282,6 +1897,7 @@ const interfaceCopy = {
     clearSearchAria: "清除搜索",
     nav: {
       home: "社区问答",
+      aiAnswer: "小留智答",
       aiPlanner: "选课沙盘",
       events: "在地活动",
       store: "L-Store",
@@ -1296,6 +1912,7 @@ const interfaceCopy = {
     topEyebrow: "校园邮箱认证社群 · 留学生专属",
     topTitle: "今天想在香港收获什么新体验？",
     registerCta: "注册 / 校园认证",
+    aiAnswerCta: "小留智答",
     plannerCta: "AI 选课",
     askCta: "发问",
     heroTitle: "我是小留",
@@ -1310,6 +1927,7 @@ const interfaceCopy = {
     commonTitle: "留学生常用入口",
     commonHint: "校园生活工具箱",
     commonEntries: [
+      ["小留智答", "AI 整理答案、官方来源与延伸追问"],
       ["AI 选课沙盘", "先模拟课表，再进入学校系统选课"],
       ["校园邮箱认证", "使用学校邮箱加入学生社区"],
       ["高校圈", "查看港大、中大、科大等院校帖子"],
@@ -1328,6 +1946,35 @@ const interfaceCopy = {
       { level: "Lv.4 小留伙伴", standard: "1000-1799 积分", benefits: "活动优先报名、CV 诊断与二手置顶福利" },
       { level: "Lv.5 社区向导", standard: "1800+ 积分", benefits: "可申请带队活动、参与内测与社区共创" },
     ],
+    aiAsk: {
+      eyebrow: "Liumer AI · 留学信息整理",
+      heading: "问小留，先看重点，再核对官方来源。",
+      intro: "把分散的申请、选课、租房与生活信息整理成可追问的答案；重要日期与资格仍以官方网站为准。",
+      label: "你想了解什么？",
+      placeholder: "例如：香港中文大学怎么申请？",
+      submit: "整理答案",
+      defaultQuery: "香港中文大学怎么申请？",
+      chips: [["大学申请", "香港中文大学怎么申请？"], ["租房避坑", "香港留学生租房要注意什么？"], ["选课安排", "香港大学选课怎样避免冲堂？"], ["实习准备", "留学生在香港怎样找实习？"]],
+      answerLabel: "小留 AI 整理",
+      demoNote: "MVP 示例知识库",
+      keyTips: "重点整理",
+      sourcesTitle: "参考来源",
+      sourcesHint: "优先列出大学及政府官方页面",
+      followupsTitle: "你可能还想问",
+      followupsHint: "点击即可继续追问",
+      askMore: "接着问点什么…",
+      sourceLink: "查看来源",
+      feedbackHelpful: "有帮助",
+      feedbackUnhelpful: "需改善",
+      disclaimer: "AI 可能遗漏或误解信息。申请资格、截止日期与费用请以院校官方网站最新公布为准。",
+      searching: "正在搜索最新网页…",
+      liveLabel: "实时网络整理",
+      offlineLabel: "网络暂不可用 · 已显示内置答案",
+      liveTitle: "已从最新网页结果整理这个问题。",
+      liveSummary: "以下重点来自本次网络搜索的页面摘要，请打开来源核对完整内容、日期与适用身份。",
+      liveSourceHint: "实时搜索结果 · 官方网站优先排列",
+      searchedAt: "搜索时间",
+    },
     searchEyebrow: "全站搜索",
     searchEmptyTitle: "输入关键词开始搜索",
     searchSummary: "可搜索社区帖子、评论、在地活动与 L-Store 福利。",
@@ -1375,6 +2022,7 @@ const interfaceCopy = {
     clearSearchAria: "Clear search",
     nav: {
       home: "Community Q&A",
+      aiAnswer: "Liumer Answers",
       aiPlanner: "Course Planner",
       events: "Local Events",
       store: "L-Store",
@@ -1389,6 +2037,7 @@ const interfaceCopy = {
     topEyebrow: "Campus-email verified community · Built for international students",
     topTitle: "What new Hong Kong experience do you want to discover today?",
     registerCta: "Register / Campus Verify",
+    aiAnswerCta: "Liumer Answers",
     plannerCta: "AI Course Planner",
     askCta: "Ask",
     heroTitle: "Hi, I am Liumer",
@@ -1403,6 +2052,7 @@ const interfaceCopy = {
     commonTitle: "Student Shortcuts",
     commonHint: "Campus life toolkit",
     commonEntries: [
+      ["Liumer Answers", "AI summaries with official sources and follow-up questions"],
       ["AI Course Planner", "Simulate a timetable before using your school system"],
       ["Campus Email Verification", "Join the student community with your school email"],
       ["School Circles", "Browse posts from HKU, CUHK, HKUST, and more"],
@@ -1421,6 +2071,35 @@ const interfaceCopy = {
       { level: "Lv.4 Community Partner", standard: "1000-1799 points", benefits: "Priority event registration, CV review, and resale post boosts" },
       { level: "Lv.5 Community Guide", standard: "1800+ points", benefits: "Apply to lead events, join beta tests, and co-create the community" },
     ],
+    aiAsk: {
+      eyebrow: "Liumer AI · Student information guide",
+      heading: "Get the key points first, then verify the official sources.",
+      intro: "Turn scattered admissions, course, housing, and student-life information into a sourced answer you can continue exploring.",
+      label: "What would you like to know?",
+      placeholder: "For example: How do I apply to CUHK?",
+      submit: "Build answer",
+      defaultQuery: "How do I apply to CUHK?",
+      chips: [["Admissions", "How do I apply to CUHK?"], ["Housing", "What should international students check before renting in Hong Kong?"], ["Course planning", "How can I avoid timetable clashes at a Hong Kong university?"], ["Internships", "How can international students prepare for internships in Hong Kong?"]],
+      answerLabel: "Liumer AI summary",
+      demoNote: "MVP sample knowledge base",
+      keyTips: "Key guidance",
+      sourcesTitle: "Reference sources",
+      sourcesHint: "Official university and government pages are prioritised",
+      followupsTitle: "You may also want to ask",
+      followupsHint: "Select one to continue",
+      askMore: "Ask a follow-up…",
+      sourceLink: "Open source",
+      feedbackHelpful: "Helpful",
+      feedbackUnhelpful: "Needs work",
+      disclaimer: "AI may miss or misinterpret information. Always verify eligibility, deadlines, and fees on the institution's latest official pages.",
+      searching: "Searching the latest web pages…",
+      liveLabel: "Live web summary",
+      offlineLabel: "Live search unavailable · showing the built-in answer",
+      liveTitle: "This answer has been organised from current web results.",
+      liveSummary: "The key points below come from this search's page snippets. Open the sources to verify the full context, date, and applicant category.",
+      liveSourceHint: "Live web results · official sources ranked first",
+      searchedAt: "Searched",
+    },
     searchEyebrow: "Site Search",
     searchEmptyTitle: "Enter a keyword to start searching",
     searchSummary: "Search community posts, comments, local events, and L-Store perks.",
@@ -1540,13 +2219,14 @@ function applyLanguageToUI() {
   document.querySelectorAll(".nav-item").forEach((item) => {
     const label = copy.nav[item.dataset.view];
     if (!label) return;
-    item.innerHTML = item.dataset.view === "aiPlanner" ? `<span class="ai-nav-mark">AI</span> ${escapeHTML(label)}` : escapeHTML(label);
+    item.innerHTML = ["aiAnswer", "aiPlanner"].includes(item.dataset.view) ? `<span class="ai-nav-mark">AI</span> ${escapeHTML(label)}` : escapeHTML(label);
   });
   setText(".points-panel > span", copy.pointsLabel);
   setText(".points-panel p", copy.pointsBody);
   setText(".topbar .eyebrow", copy.topEyebrow);
   setText(".topbar h1", copy.topTitle);
   setText("#openRegister", copy.registerCta);
+  setText("#openAiAnswer", copy.aiAnswerCta);
   setText("#openPlanner", copy.plannerCta);
   setText("#openAsk", copy.askCta);
   setText(".hero-strip h2", copy.heroTitle);
@@ -1567,6 +2247,18 @@ function applyLanguageToUI() {
     if (copy.taskItems[index]) item.textContent = copy.taskItems[index];
   });
   setText("#homeView .right-rail .panel:nth-child(3) .panel-title h3", copy.memberTitle);
+  setText("#aiAnswerEyebrow", copy.aiAsk.eyebrow);
+  setText("#aiAnswerHeading", copy.aiAsk.heading);
+  setText("#aiAnswerIntro", copy.aiAsk.intro);
+  setText("#aiAnswerLabel", copy.aiAsk.label);
+  aiAnswerInput.placeholder = copy.aiAsk.placeholder;
+  aiAnswerInput.value = copy.aiAsk.defaultQuery;
+  setText("#submitAiAnswer", copy.aiAsk.submit);
+  document.querySelector("#aiPromptChips").innerHTML = copy.aiAsk.chips
+    .map(([label, query]) => `<button type="button" data-ai-query="${escapeHTML(query)}">${escapeHTML(label)}</button>`)
+    .join("");
+  document.querySelector("#aiPromptChips").setAttribute("aria-label", copy.aiAsk.followupsTitle);
+  renderAiAnswer(copy.aiAsk.defaultQuery);
   setText("#searchView .eyebrow", copy.searchEyebrow);
   setText("#searchTitle", copy.searchEmptyTitle);
   setText("#searchSummary", copy.searchSummary);
@@ -1903,6 +2595,188 @@ function runSearch(value) {
   setView("search");
 }
 
+function detectAiAnswerIntent(query) {
+  const normalized = query.toLocaleLowerCase();
+
+  if (/(學生簽證|学生签证|study visa|student visa|entry permit|入境許可|入境许可)/i.test(normalized)) return { topic: "admissions", detail: "admissions-visa" };
+  if (/(本科|高考|gaokao|undergraduate|a-level|ib\b)/i.test(normalized)) return { topic: "admissions", detail: "admissions-undergrad" };
+  if (/(碩士|硕士|研究生|master|postgraduate|推薦信|推荐信|個人陳述|个人陈述)/i.test(normalized)) return { topic: "admissions", detail: "admissions-masters" };
+
+  if (/(按金|押金|deposit|首期租金)/i.test(normalized)) return { topic: "housing", detail: "housing-deposit" };
+  if (/(地產代理|地产代理|代理牌照|agent licence|agent license|estate agent|中介)/i.test(normalized)) return { topic: "housing", detail: "housing-agent" };
+  if (/(合租|合約|合同|租約|租约|lease|tenancy agreement|室友)/i.test(normalized)) return { topic: "housing", detail: "housing-contract" };
+
+  if (/(必修|已選|已选|固定課|固定课|required course|fixed course)/i.test(normalized)) return { topic: "courses", detail: "courses-fixed" };
+  if (/(搶課|抢课|候補|候补|waitlist|enrolment difficulty|enrollment difficulty|熱門課|热门课)/i.test(normalized)) return { topic: "courses", detail: "courses-demand" };
+  if (/(final exam|期末考|考試|考试|評核|评核|assessment)/i.test(normalized)) return { topic: "courses", detail: "courses-exam" };
+
+  if (/(作品集|portfolio)/i.test(normalized)) return { topic: "careers", detail: "careers-portfolio" };
+  if (/(iang|非本地畢業生|非本地毕业生)/i.test(normalized)) return { topic: "careers", detail: "careers-iang" };
+  if (/(履歷|履历|簡歷|简历|resume|\bcv\b)/i.test(normalized)) return { topic: "careers", detail: "careers-cv" };
+
+  if (/(申請|申请|招生|錄取|录取|學位|学位|admission|application|degree|offer)/i.test(normalized)) return { topic: "admissions", detail: null };
+  if (/(租房|租屋|房源|房東|房东|業主|业主|rent|housing|flat|apartment)/i.test(normalized)) return { topic: "housing", detail: null };
+  if (/(選課|选课|課程|课程|衝堂|冲堂|學分|学分|課表|课表|course|timetable|credit)/i.test(normalized)) return { topic: "courses", detail: null };
+  if (/(實習|实习|求職|求职|工作|就業|就业|intern|career|job)/i.test(normalized)) return { topic: "careers", detail: null };
+  return { topic: "general", detail: null };
+}
+
+function buildGeneralAiAnswer(query, locale) {
+  const answers = {
+    "zh-Hant": {
+      title: "這個問題暫時不在示例知識庫，但可以先把查找路徑整理清楚。",
+      summary: `你問的是「${query}」。目前即時搜尋暫未返回可用結果，為避免把不確定內容當成答案，我會先提示補充條件和可信來源。`,
+      bullets: [["補充場景", "寫明學校、身份、時間、地區及預算，答案會更接近你的實際情況。"], ["先找官方", "涉及資格、費用或期限時，優先查政府、院校或機構的最新頁面。"], ["再看同學經驗", "用社群帖子補充流程與踩坑，但把經驗和正式規則分開。"]],
+      followups: ["我應該補充哪些資料？", "怎樣判斷一個來源是否可靠？", "可以幫我把問題改得更具體嗎？"],
+    },
+    "zh-Hans": {
+      title: "这个问题暂时不在示例知识库，但可以先把查找路径整理清楚。",
+      summary: `你问的是“${query}”。目前实时搜索暂未返回可用结果，为避免把不确定内容当成答案，我会先提示补充条件和可信来源。`,
+      bullets: [["补充场景", "写明学校、身份、时间、地区及预算，答案会更接近你的实际情况。"], ["先找官方", "涉及资格、费用或期限时，优先查政府、院校或机构的最新页面。"], ["再看同学经验", "用社区帖子补充流程与避坑，但把经验和正式规则分开。"]],
+      followups: ["我应该补充哪些资料？", "怎样判断一个来源是否可靠？", "可以帮我把问题改得更具体吗？"],
+    },
+    en: {
+      title: "This question is outside the demo knowledge base, but we can still map a reliable path.",
+      summary: `You asked: “${query}”. Live search did not return a usable result, so the MVP is asking for context and pointing to trusted sources instead of inventing a definitive answer.`,
+      bullets: [["Add context", "Include your university, status, timing, location, and budget."], ["Check official sources", "For eligibility, fees, or deadlines, start with current government or university pages."], ["Use peer experience carefully", "Community posts help with process and practical tips, but do not replace formal rules."]],
+      followups: ["What details should I add?", "How can I judge whether a source is reliable?", "Can you help me make the question more specific?"],
+    },
+  };
+  return answers[locale] || answers["zh-Hant"];
+}
+
+function getLiveSearchEndpoint(query, locale) {
+  const supportsLocalApi = window.location.hostname.endsWith(".chatgpt.site")
+    || window.location.hostname === "localhost"
+    || window.location.hostname === "127.0.0.1";
+  const base = supportsLocalApi ? "" : LIVE_SEARCH_ORIGIN;
+  return `${base}/api/search?q=${encodeURIComponent(query)}&lang=${encodeURIComponent(locale)}`;
+}
+
+function buildLiveAiAnswer(results, offlineAnswer, copy) {
+  const usableResults = results.filter((result) => result.title && result.url);
+  const clip = (value, length = 280) => value.length > length ? `${value.slice(0, length).trim()}…` : value;
+  const lead = usableResults.find((result) => result.description)?.description;
+  return {
+    title: copy.liveTitle,
+    summary: lead ? clip(lead) : copy.liveSummary,
+    bullets: usableResults.slice(0, 4).map((result) => [result.title, clip(result.description || result.host, 240)]),
+    followups: offlineAnswer.followups,
+  };
+}
+
+function renderAiAnswerMarkup({ query, answer, sources, status, statusMode, sourceHint }) {
+  const copy = currentCopy().aiAsk;
+  aiAnswerOutput.innerHTML = `
+    <section class="ai-answer-card panel">
+      <div class="ai-answer-meta">
+        <span class="ai-answer-badge">AI</span>
+        <strong>${escapeHTML(copy.answerLabel)}</strong>
+        <small class="ai-answer-status ${escapeHTML(statusMode)}">${escapeHTML(status)}</small>
+      </div>
+      <p class="ai-answer-query">${escapeHTML(query)}</p>
+      <h3>${escapeHTML(answer.title)}</h3>
+      <p class="ai-answer-summary">${escapeHTML(answer.summary)}</p>
+      <h4>${escapeHTML(copy.keyTips)}</h4>
+      <ol class="ai-answer-points">
+        ${answer.bullets.map(([title, body]) => `<li><strong>${escapeHTML(title)}</strong><span>${escapeHTML(body)}</span></li>`).join("")}
+      </ol>
+      <p class="ai-answer-disclaimer">${escapeHTML(copy.disclaimer)}</p>
+      <div class="ai-feedback" role="group" aria-label="${escapeHTML(copy.answerLabel)}">
+        <button type="button" data-ai-feedback="helpful" aria-pressed="false">+ ${escapeHTML(copy.feedbackHelpful)}</button>
+        <button type="button" data-ai-feedback="unhelpful" aria-pressed="false">− ${escapeHTML(copy.feedbackUnhelpful)}</button>
+      </div>
+    </section>
+
+    <section class="ai-source-section">
+      <div class="ai-answer-section-head">
+        <div><h3>${escapeHTML(copy.sourcesTitle)}</h3><p>${escapeHTML(sourceHint)}</p></div>
+      </div>
+      <div class="ai-source-grid">
+        ${sources.map((source) => `
+          <a class="ai-source-card" href="${escapeHTML(source.url)}" target="_blank" rel="noreferrer">
+            <span>${escapeHTML(source.meta)}</span>
+            <strong>${escapeHTML(source.title)}</strong>
+            <small>${escapeHTML(copy.sourceLink)} ↗</small>
+          </a>
+        `).join("")}
+      </div>
+    </section>
+
+    <section class="ai-followup-section">
+      <div class="ai-answer-section-head">
+        <div><h3>${escapeHTML(copy.followupsTitle)}</h3><p>${escapeHTML(copy.followupsHint)}</p></div>
+      </div>
+      <div class="ai-followup-list">
+        ${answer.followups.map((followup) => `<button type="button" data-ai-followup="${escapeHTML(followup)}"><span>${escapeHTML(followup)}</span><b>→</b></button>`).join("")}
+      </div>
+      <form class="ai-followup-bar" id="aiFollowupForm">
+        <input id="aiFollowupInput" aria-label="${escapeHTML(copy.askMore)}" placeholder="${escapeHTML(copy.askMore)}" />
+        <button class="ai-action" type="submit" aria-label="${escapeHTML(copy.submit)}">→</button>
+      </form>
+    </section>
+  `;
+}
+
+async function renderAiAnswer(rawQuery) {
+  const query = rawQuery.trim() || currentCopy().aiAsk.defaultQuery;
+  const copy = currentCopy().aiAsk;
+  const locale = aiAnswerLibrary[userSettings.interfaceLanguage] ? userSettings.interfaceLanguage : "zh-Hant";
+  const intent = detectAiAnswerIntent(query);
+  const details = aiAnswerDetails[locale] || aiAnswerDetails["zh-Hant"];
+  const offlineAnswer = (intent.detail && details[intent.detail])
+    || (intent.topic === "general" ? buildGeneralAiAnswer(query, locale) : aiAnswerLibrary[locale][intent.topic]);
+  const offlineSources = (intent.detail && aiAnswerDetailSources[intent.detail]) || aiAnswerSources[intent.topic];
+  const requestId = ++aiSearchRequestId;
+
+  renderAiAnswerMarkup({
+    query,
+    answer: offlineAnswer,
+    sources: offlineSources,
+    status: copy.searching,
+    statusMode: "searching",
+    sourceHint: copy.sourcesHint,
+  });
+
+  try {
+    const response = await fetch(getLiveSearchEndpoint(query, locale), { headers: { Accept: "application/json" } });
+    if (!response.ok) throw new Error("Live search unavailable");
+    const payload = await response.json();
+    if (requestId !== aiSearchRequestId || !Array.isArray(payload.results) || !payload.results.length) return;
+
+    const liveAnswer = buildLiveAiAnswer(payload.results, offlineAnswer, copy);
+    const officialLabel = locale === "en" ? "Official" : locale === "zh-Hans" ? "官方" : "官方";
+    const liveSources = payload.results.slice(0, 8).map((result) => ({
+      title: result.title,
+      meta: `${result.host}${result.official ? ` · ${officialLabel}` : ""}`,
+      url: result.url,
+    }));
+    const searchedAt = new Date(payload.searchedAt);
+    const time = Number.isNaN(searchedAt.getTime())
+      ? ""
+      : searchedAt.toLocaleTimeString(locale === "en" ? "en-HK" : locale === "zh-Hans" ? "zh-CN" : "zh-HK", { hour: "2-digit", minute: "2-digit" });
+
+    renderAiAnswerMarkup({
+      query,
+      answer: liveAnswer,
+      sources: liveSources,
+      status: `${copy.liveLabel}${time ? ` · ${copy.searchedAt} ${time}` : ""}`,
+      statusMode: "live",
+      sourceHint: copy.liveSourceHint,
+    });
+  } catch {
+    if (requestId !== aiSearchRequestId) return;
+    renderAiAnswerMarkup({
+      query,
+      answer: offlineAnswer,
+      sources: offlineSources,
+      status: copy.offlineLabel,
+      statusMode: "offline",
+      sourceHint: copy.sourcesHint,
+    });
+  }
+}
+
 function renderTopicDetail(index) {
   activeQuestionIndex = index;
   lastDetailIndex = index;
@@ -2126,6 +3000,10 @@ function setView(viewName) {
 
 document.querySelector("#openAsk").addEventListener("click", () => openDialog(askDialog));
 document.querySelector("#openRegister").addEventListener("click", () => openDialog(document.querySelector("#registerDialog")));
+document.querySelector("#openAiAnswer").addEventListener("click", () => {
+  setView("aiAnswer");
+  aiAnswerInput.focus();
+});
 document.querySelector("#openPlanner").addEventListener("click", () => {
   setView("aiPlanner");
   renderPlannerPlan();
@@ -2210,6 +3088,41 @@ globalSearch.addEventListener("keydown", (event) => {
   runSearch("");
 });
 
+document.querySelector("#aiAnswerForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  renderAiAnswer(aiAnswerInput.value);
+});
+
+document.querySelector("#aiPromptChips").addEventListener("click", (event) => {
+  const button = event.target.closest("[data-ai-query]");
+  if (!button) return;
+  aiAnswerInput.value = button.dataset.aiQuery;
+  renderAiAnswer(button.dataset.aiQuery);
+});
+
+aiAnswerOutput.addEventListener("click", (event) => {
+  const followup = event.target.closest("[data-ai-followup]");
+  if (followup) {
+    aiAnswerInput.value = followup.dataset.aiFollowup;
+    renderAiAnswer(followup.dataset.aiFollowup);
+    document.querySelector("#aiAnswerView").scrollIntoView({ behavior: "smooth", block: "start" });
+    return;
+  }
+  const feedback = event.target.closest("[data-ai-feedback]");
+  if (!feedback) return;
+  document.querySelectorAll("[data-ai-feedback]").forEach((button) => button.setAttribute("aria-pressed", String(button === feedback)));
+  showToast(feedback.dataset.aiFeedback === "helpful" ? currentCopy().aiAsk.feedbackHelpful : currentCopy().aiAsk.feedbackUnhelpful);
+});
+
+aiAnswerOutput.addEventListener("submit", (event) => {
+  if (!event.target.matches("#aiFollowupForm")) return;
+  event.preventDefault();
+  const followupInput = document.querySelector("#aiFollowupInput");
+  if (!followupInput.value.trim()) return;
+  aiAnswerInput.value = followupInput.value.trim();
+  renderAiAnswer(followupInput.value);
+});
+
 clearSearch.addEventListener("click", () => {
   globalSearch.value = "";
   runSearch("");
@@ -2246,6 +3159,11 @@ document.querySelector("#searchResults").addEventListener("click", (event) => {
 document.querySelector(".campus-list").addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
+  if (button.dataset.tool === "ai-answer") {
+    setView("aiAnswer");
+    aiAnswerInput.focus();
+    return;
+  }
   if (button.dataset.tool === "ai-planner") {
     setView("aiPlanner");
     renderPlannerPlan();
@@ -2352,7 +3270,53 @@ document.querySelector("#regeneratePlan").addEventListener("click", () => {
 });
 
 document.querySelector("#plannerSchool").addEventListener("change", () => {
+  populatePlannerFacultyOptions();
+  syncEntryRouteUI();
   renderPlannerPlan();
+});
+
+document.querySelector("#plannerFaculty").addEventListener("change", () => {
+  populatePlannerMajorOptions();
+  renderPlannerPlan();
+});
+
+document.querySelector("#plannerMajor").addEventListener("input", () => {
+  renderDegreeRequirements();
+});
+
+document.querySelector("#plannerMajor").addEventListener("change", renderPlannerPlan);
+
+document.querySelector("#plannerEntryRoute").addEventListener("change", () => {
+  syncEntryRouteUI(true);
+  activeDegreeCreditKey = "total";
+  renderPlannerPlan();
+});
+
+document.querySelector("#plannerYear").addEventListener("change", () => {
+  syncEntryRouteUI();
+  activeDegreeCreditKey = "total";
+  renderPlannerPlan();
+});
+
+const degreeRequirementSummary = document.querySelector("#degreeRequirementSummary");
+degreeRequirementSummary.addEventListener("click", (event) => {
+  const item = event.target.closest(".degree-credit-item");
+  if (!item) return;
+  showDegreeCreditDetail(item.dataset.creditKey);
+});
+
+degreeRequirementSummary.addEventListener("pointerdown", (event) => {
+  const item = event.target.closest(".degree-credit-item");
+  if (!item) return;
+  window.clearTimeout(degreeLongPressTimer);
+  degreeLongPressTimer = window.setTimeout(() => {
+    showDegreeCreditDetail(item.dataset.creditKey);
+    navigator.vibrate?.(20);
+  }, 520);
+});
+
+["pointerup", "pointercancel", "pointerleave"].forEach((eventName) => {
+  degreeRequirementSummary.addEventListener(eventName, () => window.clearTimeout(degreeLongPressTimer));
 });
 
 document.querySelector("#targetCourses").addEventListener("change", () => {
@@ -2363,7 +3327,7 @@ document.querySelector("#targetCredits").addEventListener("change", () => {
   renderPlannerPlan();
 });
 
-document.querySelectorAll("#plannerYear, #plannerTrack, input[name='plannerGoal'], #preferredFreeDay, #earliestStart, #latestEnd, #maxWeeklyHours, #groupWorkTolerance, #finalExamPreference, #balancedLoad, #compactDays, #avoidTightGaps").forEach((control) => {
+document.querySelectorAll("#plannerCohort, #plannerTrack, input[name='plannerGoal'], #preferredFreeDay, #earliestStart, #latestEnd, #maxWeeklyHours, #groupWorkTolerance, #finalExamPreference, #balancedLoad, #compactDays, #avoidTightGaps").forEach((control) => {
   control.addEventListener("change", renderPlannerPlan);
 });
 
@@ -2516,5 +3480,7 @@ renderCards("#eventsList", events, "報名", "join-btn");
 renderCards("#storeList", storeItems, "兌換", "redeem-btn");
 renderLevels();
 populateTargetCreditOptions();
+populatePlannerFacultyOptions();
+syncEntryRouteUI();
 renderFixedCourses();
 renderPlannerPlan();
